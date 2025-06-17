@@ -44,9 +44,13 @@ php artisan db:seed
 ```
 
 ## 使用技術(実行環境)
-- PHP8.3.0
-- Laravel8.83.27
-- MySQL8.0.26
+  ・PHP 7.4.9
+  ・Laravel 8.83.8
+  ・MySQL  8.0.26
+  ・Fortify 1.19.1
+  ・Blade
+  ・Docker/Doker Compose
+  ・Git/GitHub
 
 ## ER図
 ![alt](erd.png)
