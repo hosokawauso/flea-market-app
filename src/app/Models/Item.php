@@ -8,4 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'item_img',
+        'condition',
+        'item_name',
+        'brand_name',
+        'description',
+        'price',
+    ];
+
+    protected $guarded = [
+        'is_sold',
+        'id'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'item_category');
+    }
+
 }

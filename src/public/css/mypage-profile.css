@@ -1,0 +1,28 @@
+
+
+
+
+.img-upload {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.upload-button {
+  border: 1px solid #f66;
+  color: #f66;
+  background-color: #fff0f0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
