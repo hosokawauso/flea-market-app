@@ -23,14 +23,29 @@ class Item extends Model
         'id'
     ];
 
-    public function user()
+    public function users()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function categories()
+    public function category()
     {
         return $this->belongsToMany(Category::class, 'item_category');
+    }
+
+    public function favorite()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(Comments::class);
+    }
+
+    public function purchase()
+    {
+        return $this->hasOne(Purchase::class);
     }
 
 }

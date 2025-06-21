@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     protected $guarded = [
         'id'
-    ]
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -50,8 +50,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function items()
+    public function item()
     {
         return $this->hadMany(Item::class);
     }
+
+    public function favorite()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(Comments::class);
+    }
+
+    public function purchaseAddress()
+    {
+        return $this->hadMany(PurchaseAddress::class);
+    }
+
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+    
 }

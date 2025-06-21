@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Item;
+use Illuminate\Support\Facades\DB;
+
 
 class ItemSeeder extends Seeder
 {
@@ -13,7 +16,7 @@ class ItemSeeder extends Seeder
      */
     public function run()
     {
-        $items = [
+        $item = [
             [
                 'item_name' => '腕時計',
                 'brand_name' => 'ARMANI',
@@ -87,5 +90,7 @@ class ItemSeeder extends Seeder
             ],
 
         ];
+
+        DB::table('items')->insert($item);
     }
 }

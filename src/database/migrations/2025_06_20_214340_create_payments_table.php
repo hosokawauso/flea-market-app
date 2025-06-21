@@ -15,7 +15,11 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
+            $table->tinyInteger('payment')->comment('1:コンビニ払い, 2:カード支払い');
+            $table->string('stripe_payment_id')->unique()->nullable()->comment('Stripeの支払いID');
+            $table->integer('amount');
+            $table->timestamp('created_at');
         });
     }
 
