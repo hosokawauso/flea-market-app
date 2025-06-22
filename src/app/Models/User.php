@@ -65,14 +65,14 @@ class User extends Authenticatable
         return $this->hasMany(Comments::class);
     }
 
-    public function purchaseAddress()
+/*     public function purchaseAddress()
     {
         return $this->hadMany(PurchaseAddress::class);
     }
-
+ */
     public function purchase()
     {
         return $this->hasMany(Purchase::class);
     }
-    
+
 }

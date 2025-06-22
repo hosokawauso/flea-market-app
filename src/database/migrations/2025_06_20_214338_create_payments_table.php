@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePurchaseAddressesTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreatePurchaseAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchase_addresses', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('method')->comment('1:コンビニ払い, 2:カード支払い');
+            $table->string('stripe_payment_id')->unique()->nullable()->comment('Stripeの支払いID');
+            $table->integer('amount');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreatePurchaseAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchase_addresses');
+        Schema::dropIfExists('payments');
     }
 }

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('css/mypage-profile.css') }}">
 @endsection
 
-@section('link')
+{{-- @section('link')
 <form class="search-form" action="/search" method="get">
   @csrf
   <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにかをお探しですか？" value="{{ request('keyword') }}">
@@ -19,7 +19,7 @@
   <a class="header__link-sell" href="/sell">出品</a>
 </div>
 @endsection
-
+ --}}
 @section('content')
 <div class="profile">
   <h2 class="profile__title">プロフィール設定</h2>
@@ -46,7 +46,7 @@
       </div>
       <div class="profile-form__group">
         <label class="profile-form__label" for="postal_code">郵便番号</label>
-        <input class="profile-form__input" type="text" name="postal_code" id="postal_code" inputmode="numeric" pattern="\d{3}-?\d{4}" maxlength="8">
+        <input class="profile-form__input" type="text" name="postal_code" id="postal_code" inputmode="numeric" pattern="\d{3}-\d{4}" maxlength="8">
         <p class="profile-form__error-message">
           @error('postal_code')
           {{ $message }}

@@ -23,13 +23,13 @@ class Purchase extends Model
         return $this->belongsTo(Item::class);
     }
 
-    public function purchaseAddress()
+    /* public function purchaseAddress()
     {
         return $this->hasOne(PurchaseAddress::class);
-    }
+    } */
 
     public function payment()
     {
-        return $this->hasOne(Payment::class);
+        return $this->belongsTo(Payment::class);
     }
 }

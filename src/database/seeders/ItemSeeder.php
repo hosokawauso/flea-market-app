@@ -18,12 +18,14 @@ class ItemSeeder extends Seeder
     {
         $item = [
             [
+                'user_id' => 1,
                 'item_name' => '腕時計',
                 'brand_name' => 'ARMANI',
                 'price' => 15,000,
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
                 'item_img' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Armani+Mens+Clock.jpg',
                 'condition' => 1,
+                'is_sold' => '',
             ],
             [
                 'item_name' => 'HDD',

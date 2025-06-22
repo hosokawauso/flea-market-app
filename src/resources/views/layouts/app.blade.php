@@ -17,8 +17,29 @@
       <div class="logo">
         <img src="{{ asset('img/logo.svg') }}" alt="COACHTECH">
       </div>
-      @yield('link')
+
+      {{--@auth
+      {{-- ログイン中だけ表示 --}}
+      <form class="search-form" action="/search" method="get">
+        @csrf
+        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにかをお探しですか？" value="{{ request('keyword') }}">
+      </form>
+      
+      <nav class="header__nav">
+        <form action="/logout" method="post">
+          @csrf
+          <input class="header__link-logout" type="submit" value="ログアウト">
+        </form>
+        <a class="header__link-mypage" href="/mypage">マイページ</a>
+        <a class="header__link-sell" href="/sell">出品</a>
+      </nav>
+      {{-- @endauth --}}
+
+      {{-- @guest --}}
+      {{-- 未ログインの時に必要であればナビケーション追加 --}}
+     {{--endguest --}}
     </header>
+
     <div class="content">
       @yield('content')
     </div>
