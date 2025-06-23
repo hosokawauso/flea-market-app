@@ -1,0 +1,57 @@
+@extends('layouts.app')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
+@endsection
+
+@section('content')
+<div class="mypage">
+  <div class="mypage__heading">
+    <div class="profile-img__info">
+      @if (isset($user) && $user->profile_img)
+        <label for="profile_img">
+        <img id="preview" src="{{ asset('storage/' . $user->profile_img) }}" alt="プロフィール画像">
+        </label>
+      @else
+        <label for="profile_img">
+        <div class="profile-img__placeholder">未設定</div>
+        </label>
+      @endif
+
+        <div class="user-name">
+          {{-- {{ $user->name }} --}}ユーザー名
+        </div>
+
+        <a class="profile-edit-button" href="/mypage/profile" >プロフィールを編集</a>
+    </div>
+  </div>
+
+  <div class="mypage__tabs">
+    <a class="{{ $tab === 'sell' ? 'active' : '' }}" href="/mypage?tab=sell">出品した商品</a>
+    <a class="{{ $tab === 'buy' ? 'active' : '' }}" href="/mypage?tab=buy">購入した商品</a>
+  </div>
+
+  <div class="mypage__items">
+    @if ($tab === 'sell')
+      @forelse ($sellingItems as $item)
+        <div class="item-card">
+          <img src="{{ asset('storage/' .$item->item_img)}}" alt="{{ $item->item_name}}">
+          <p> {{ $item->item_name }}</p>
+        </div>
+      @empty
+        <p>出品した商品はありません。</p>
+      @endforelse
+
+    @elseif($tab === 'buy')
+      @forelse($purchasedItems as $item)
+        <div class="item-card">
+          <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
+          <p>{{ $item->item_name }}</p>
+        </div>
+        @empty
+          <p>購入した商品はありません。</p>
+      @endforelse
+    @endif
+  </div>
+</div>
+@endsection

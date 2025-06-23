@@ -31,7 +31,7 @@
       </div>
       <div class="register-form__group">
         <label class="register-form__label" for="password">パスワード</label>
-        <input class="register-form__input" type="password" name="password" id="password" value="{{ old('password') }}">
+        <input class="register-form__input" type="password" name="password" id="password">
         <p class="register-form__error-message">
           @error('password')
           {{ $message }}

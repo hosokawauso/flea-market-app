@@ -4,36 +4,29 @@
 <link rel="stylesheet" href="{{ asset('css/mypage-profile.css') }}">
 @endsection
 
-{{-- @section('link')
-<form class="search-form" action="/search" method="get">
-  @csrf
-  <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにかをお探しですか？" value="{{ request('keyword') }}">
-</form>
-
-<div class="header__link">
-  <form action="/logout" method="post">
-    @csrf
-    <input class="header__link-logout" type="submit" value="ログアウト">
-  </form>
-  <a class="header__link-mypage" href="/mypage">マイページ</a>
-  <a class="header__link-sell" href="/sell">出品</a>
-</div>
-@endsection
- --}}
 @section('content')
 <div class="profile">
   <h2 class="profile__title">プロフィール設定</h2>
-  <div class="profile__inner">
-    <form class="profile-form__form" action="#" method="post">
-      @csrf
-      <div class="profile-img">
-        <label for="img-upload">
-          <img id="preview" src="https://via.placeholder.com/100/cccccc/ffffff?text=" alt="プロフィール画像">
-        </label>
-        <input type="file" id="profile_img" name="profile_img" accept="image/*" hidden>
-        <label class="upload-button" for="profile_img">画像を選択する</label>
+    <div class="profile__inner">
+      <form class="profile-form__form" action="#" method="post">
+        @csrf
+        <div class="profile-img">
+          @if (isset($user) && $user->profile_img)
+      <label for="profile_img">
+        <img id="preview" src="{{ asset('storage/' . $user->profile_img) }}" alt="プロフィール画像">
+      </label>
+          @else
+            <label for="profile_img">
+              <div class="profile-img__placeholder">未設定</div>
+            </label>
+          @endif
 
-      </div>
+    <input type="file" id="profile_img" name="profile_img" accept="image/*" hidden>
+    <label class="upload-button" for="profile_img">画像を選択する</label>
+        </div>
+      </form>
+    </div>
+</div>
 
       <div class="profile-form__group">
         <label class="profile-form__label" for="name">ユーザー名</label>

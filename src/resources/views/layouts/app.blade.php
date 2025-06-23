@@ -22,7 +22,7 @@
       {{-- ログイン中だけ表示 --}}
       <form class="search-form" action="/search" method="get">
         @csrf
-        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにかをお探しですか？" value="{{ request('keyword') }}">
+        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
       </form>
       
       <nav class="header__nav">

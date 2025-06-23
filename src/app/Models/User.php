@@ -21,10 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'profile_img',
-        'postal_code',
-        'address',
-        'building',
+        'is_profile_set',
     ];
 
     protected $guarded = [

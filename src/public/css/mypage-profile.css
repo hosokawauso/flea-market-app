@@ -1,28 +1,124 @@
+/* プロフィールページ全体 */
+.profile {
+  max-width: 74%;
+  margin: 40px auto;
+  padding: 0 16px;
+}
 
+.profile__title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  text-align: center;
+}
 
-
-
-.img-upload {
+/* フォーム内側 */
+/* .profile__inner {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+ */
+/* プロフィール画像エリア */
+.profile-img {
   display: flex;
   align-items: center;
   gap: 16px;
+  margin-bottom: 24px;
 }
 
-#preview {
+.profile-img img {
   width: 100px;
   height: 100px;
-  object-fit: cover;
   border-radius: 50%;
-  background-color: #ddd;
-  cursor: pointer;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  display: block;
 }
 
+/* アップロードボタン */
 .upload-button {
-  border: 1px solid #f66;
-  color: #f66;
-  background-color: #fff0f0;
+  background: none;
+  border: 1px solid #ff6666;
+  color: #ff6666;
   padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
+}
+
+.profile-img__placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: black;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* フォームグループ */
+.profile-form__group {
+  margin-bottom: 20px;
+}
+
+.profile-form__label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.profile-form__input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* エラーメッセージ */
+.profile-form__error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* ボタン */
+.profile-form__button {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.profile-form__button-submit {
+  background-color: #ff6666;
+  color: #fff;
+  width: 100%;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* レスポンシブ（スマホ時） */
+@media screen and (max-width: 768px) {
+  .profile-img {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-img img {
+    margin-bottom: 8px;
+  }
+
+  .upload-button {
+    align-self: flex-start;
+  }
 }

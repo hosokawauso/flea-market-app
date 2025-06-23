@@ -24,7 +24,8 @@ class CreateNewUser implements CreatesNewUsers
             'email' => [
                 'required', 'email'],
             'password' => $this->passwordRules(),
-            'confirmation_password' => ['required', 'confirmed'],
+            'password' => ['required', 'min:8'],
+            /* 'password_confirmation' => ['required', 'confirmed'], */
         ])->validate();
             
 
