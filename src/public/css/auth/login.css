@@ -1,6 +1,6 @@
 /* 全体を中央寄せ */
 .login-form {
-  max-width: 50%;
+  width: 50%;
   margin: 40px auto;
   padding: 40px;
 }

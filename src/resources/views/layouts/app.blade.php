@@ -18,7 +18,7 @@
         <img src="{{ asset('img/logo.svg') }}" alt="COACHTECH">
       </div>
 
-      {{--@auth
+      @auth
       {{-- ログイン中だけ表示 --}}
       <form class="search-form" action="/search" method="get">
         @csrf
@@ -33,11 +33,20 @@
         <a class="header__link-mypage" href="/mypage">マイページ</a>
         <a class="header__link-sell" href="/sell">出品</a>
       </nav>
-      {{-- @endauth --}}
+      @endauth
 
-      {{-- @guest --}}
-      {{-- 未ログインの時に必要であればナビケーション追加 --}}
-     {{--endguest --}}
+      @guest
+      <form class="search-form" action="/search" method="get">
+        @csrf
+        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
+      </form>
+      
+      <nav class="header__nav">
+        <a class="header__link-login" href="/login">ログイン</a>
+        <a class="header__link-mypage" href="/mypage">マイページ</a>
+        <a class="header__link-sell" href="/sell">出品</a>
+      </nav>
+     @endguest
     </header>
 
     <div class="content">

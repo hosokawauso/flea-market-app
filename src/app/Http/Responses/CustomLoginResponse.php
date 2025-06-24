@@ -17,6 +17,6 @@ class CustomLoginResponse implements LoginResponseContract
         }
 
         // 通常のログイン後の遷移先
-        return redirect()->intended(config('fortify.home'));
+        return redirect()->intended('/mypage');
     }
 }

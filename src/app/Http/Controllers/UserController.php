@@ -8,27 +8,30 @@ use App\Http\Requests\ProfileRequest;
 
 class UserController extends Controller
 {
+    
+    
+    
     public function profile()
     {
         $user = Auth::user();
-        return view('mypage-profile', compact('user'));
+        return view('profile', compact('user'));
     }
 
     public function mypage(Request $request)
     {
         $user = Auth::user();
-        $tab = $request->query('tab', 'sell');
+        $page = $request->query('page', 'sell');
 
         $sellingItems = $user->items ?? collect();
         $purchasedItems = $user->purchase()->with('item')->get()->pluck('item');
 
-        return view('mypage', compact('user', 'tab', 'sellingItems', 'purchasedItems'));
+        return view('mypage', compact('user', 'page', 'sellingItems', 'purchasedItems'));
     }
 
-    public function store(RegisterRequest $request)
+    /* public function store(RegisterRequest $request)
     {
 
-    }
+    } */
 
     public function update(ProfileRequest $request)
     {

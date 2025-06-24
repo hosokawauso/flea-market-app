@@ -1,0 +1,68 @@
+.top__inner {
+  width: 100%;
+}
+
+.top__tabs {
+  border-bottom: 4px solid #555;
+}
+
+a {
+  text-decoration: none;
+  color: #555;
+  margin: 20px;
+  font-weight: bold;
+  font-size: 25px;
+  padding-bottom: 4px;
+  transition: all 0.3s ease;
+}
+
+.top__tabs a.active {
+  color: #ff6666;
+}
+
+.empty-message {
+  grid-column: 1 / -1 !important;
+  /* ← グリッド4列全体にまたがる */
+  text-align: center;
+  padding: 40px 0;
+  font-size: 20px;
+  color: #555;
+}
+
+.top__items {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 40px 20px;
+}
+.item-card {
+  border: 1px solid #ccc;
+  padding: 8px;
+  background-color: #fff;
+  position: relative;
+  text-align: center;
+}
+
+.item-img {
+  position: relative;
+}
+
+.item-img img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.sold-label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: red;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+

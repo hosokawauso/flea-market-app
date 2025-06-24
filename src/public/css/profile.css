@@ -1,6 +1,6 @@
 /* プロフィールページ全体 */
 .profile {
-  max-width: 74%;
+  width: 50%;
   margin: 40px auto;
   padding: 0 16px;
 }
@@ -70,7 +70,7 @@
   display: block;
   margin-bottom: 6px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .profile-form__input {
@@ -78,7 +78,7 @@
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 20px;
   box-sizing: border-box;
 }
 
