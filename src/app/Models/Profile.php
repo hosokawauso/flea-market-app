@@ -8,4 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
+
+    protected $guarded = [
+        'id'
+    ];
+
+    protected $fillable = [
+        'profile_img',
+        'postal_code',
+        'address',
+        'building',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

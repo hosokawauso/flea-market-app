@@ -25,19 +25,19 @@ class AddressRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'postal_code' => ['required', 'regex:/^\d{3}-d{4}$/'],
+            'postal_code' => ['required', 'regex:/^\d{3}-\d{4}$/'],
             'address' => ['required'],
             'building' => ['nullable'],
         ];
     }
 
-    public function message()
+    public function messages()
     {
         return [
             'name.required' =>'お名前を入力してください',
             'postal_code.required' => '郵便番号を入力してください',
             'postal_code.regex' => 'ハイフン(-)を含めた8文字で入力してください',
-            'address' => '住所を入力してください',
+            'address.required' => '住所を入力してください',
         ];
     }
 }

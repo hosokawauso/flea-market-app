@@ -19,7 +19,7 @@
       @endif
 
         <div class="user-name">
-          {{-- {{ $user->name }} --}}ユーザー名
+          {{ $user->name }}
         </div>
 
         <a class="profile-edit-button" href="/mypage/profile" >プロフィールを編集</a>

@@ -37,9 +37,9 @@
 
 .register-form__error-message {
   color: red;
-  font-size: 14px;
-  margin-top: 5px;
-  min-height: 18pt;
+  font-size: 15px;
+  margin-top: 4px;
+  height: 16pt;
 }
 
 .register-form__button-submit {

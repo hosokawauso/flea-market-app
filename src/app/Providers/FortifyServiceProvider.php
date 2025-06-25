@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\UpdateUserProfileInformation;
-use App\Http\Responses\CustomLoginResponse;
+use Laravel\Fortify\Contracts\RegisterResponse;
+use App\Http\Responses\CustomRegisterResponse;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -25,8 +26,15 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(LoginResponse::class, CustomLoginResponse::class);
-    }
+/*         $this->app->singleton(LoginResponse::class, CustomLoginResponse::class);
+ */       /*  $this->app->singleton(RegisterResponse::class, CustomRegisterResponse::class);
+    } */
+
+/*     public function toResponse($request)
+{
+    return redirect()->intended('/mypage');
+}
+ */    }
 
     /**
      * Bootstrap any application services.

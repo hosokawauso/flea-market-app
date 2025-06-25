@@ -42,6 +42,11 @@ class ItemController extends Controller
         
     }
 
+    public function sell()
+    {
+        
+    }
+
 /*     public function search(Request $request)
     {
     $keyword = $request->input('keyword');

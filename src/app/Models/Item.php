@@ -28,17 +28,17 @@ class Item extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsToMany(Category::class, 'item_category');
+        return $this->belongsToMany(Category::class, 'category_item')->withTimestamps();
     }
 
-    public function favorite()
+    public function favorites()
     {
         return $this->hasMany(Favorite::class);
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comments::class);
     }

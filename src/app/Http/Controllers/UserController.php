@@ -4,17 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\AddressRequest;
 
 class UserController extends Controller
 {
     
     
     
-    public function profile()
+    public function edit()
     {
+        return view('profile', ['user'=>Auth::user()]);
+    }
+
+    public function update(AddressRequest $request)
+    {
+        /* $this->validate($request, (new ProfileRequest())->rules()); */
+
         $user = Auth::user();
-        return view('profile', compact('user'));
+
+        $user->fill($request->only(['name', 'postal_code', 'address', 'building']));
+
+/*         if($request->hasFile('profile_img')) {
+            $path = $request->file('profile_img')->store('profile_imgs', 'public');
+            $user->profile_img = $path;
+        }
+ */
+        $user->is_profile_set = true;
+        $user->save();
+
+        return redirect('/mypage');
     }
 
     public function mypage(Request $request)
@@ -33,7 +51,7 @@ class UserController extends Controller
 
     } */
 
-    public function update(ProfileRequest $request)
+/*     public function update(ProfileRequest $request)
     {
         $user = Auth::user();
 
@@ -46,4 +64,4 @@ class UserController extends Controller
 
         return redirect ('/mypage')->with('message', 'プロフィールを更新しました');
     }
-}
+ */}

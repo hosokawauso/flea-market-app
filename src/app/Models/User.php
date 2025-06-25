@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_img',
+        'postal_code',
+        'address',
+        'building',
         'is_profile_set',
     ];
 
@@ -47,27 +51,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function item()
+    public function items()
     {
         return $this->hadMany(Item::class);
     }
 
-    public function favorite()
+    public function favorites()
     {
         return $this->hasMany(Favorite::class);
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comments::class);
     }
 
-/*     public function purchaseAddress()
-    {
-        return $this->hadMany(PurchaseAddress::class);
-    }
- */
-    public function purchase()
+    public function purchases()
     {
         return $this->hasMany(Purchase::class);
     }
