@@ -41,7 +41,7 @@ class UserController extends Controller
         $page = $request->query('page', 'sell');
 
         $sellingItems = $user->items ?? collect();
-        $purchasedItems = $user->purchase()->with('item')->get()->pluck('item');
+        $purchasedItems = $user->purchases()->with('item')->get()->pluck('item');
 
         return view('mypage', compact('user', 'page', 'sellingItems', 'purchasedItems'));
     }

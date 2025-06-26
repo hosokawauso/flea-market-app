@@ -131,11 +131,12 @@ class ItemSeeder extends Seeder
         ];
 
         foreach ($items as $data) {
-            $categoryId = $data['categories'];
+            $categoryIds = $data['categories'];
+            unset($data['categories']);
 
+            $item = Item::create($data);
 
-
-            $item->categories()->attach()
+            $item->categories()->attach($categoryIds);
         }
     }
 }

@@ -11,3 +11,5 @@ Route::get('/mypage', [UserController::class, 'mypage'])->middleware('auth');
 
 
 Route::get('/', [ItemController::class, 'index']);
+Route::get('/sell', [ItemController::class, 'edit']);
+Route::post('/sell', [ItemController::class, 'sell']);
