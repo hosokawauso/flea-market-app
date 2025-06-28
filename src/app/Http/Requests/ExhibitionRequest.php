@@ -26,21 +26,22 @@ class ExhibitionRequest extends FormRequest
         return [
             'item_name' => ['required'],
             'description' => ['required','max:255'],
-            'item_img' => ['required','file', 'mines:jpeg,png' ],
+            'item_img' => ['required','file', 'mimes:jpeg,png' ],
             'category' => ['required'],
             'condition' => ['required'],
             'price' => ['required', 'integer', 'min:0'],
         ];
     }
 
-    public function message()
+    public function messages()
     {
         return [
-            'item_name' => '商品名を入力してください',
+            'item_name.required' => '商品名を入力してください',
             'description.required' => '商品説明を入力してください',
             'description.max' => '商品説明は255文字以内で入力してください',
-            'item_img.mines' => '拡張子は .jpeg または .png の画像を選択してください',
-            'category' => '商品のカテゴリーを選択してください',
+            'item_img.required' => '商品画像を選択してください',
+            'item_img.mimes' => '拡張子は .jpeg または .png の画像を選択してください',
+            'category.required' => '商品のカテゴリーを選択してください',
             'condition.required' => '商品の状態を選択してください',
             'price.required' => '商品価格を設定してください',
             'price.integer' => '商品価格は整数で設定してください',

@@ -22,7 +22,7 @@ class UserController extends Controller
 
         $user = Auth::user();
 
-        $user->fill($request->only(['name', 'postal_code', 'address', 'building']));
+        $user->fill($request->only(['profile_img', 'name', 'postal_code', 'address', 'building']));
 
 /*         if($request->hasFile('profile_img')) {
             $path = $request->file('profile_img')->store('profile_imgs', 'public');

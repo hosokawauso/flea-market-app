@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Category;
+use App\Http\Requests\ExhibitionRequest;
 
 class ItemController extends Controller
 {
@@ -52,7 +53,25 @@ class ItemController extends Controller
 
     public function sell(ExhibitionRequest $request)
     {
-        /* $user = Auth::user(); */
+        $user = Auth::user();
+
+       $path = $request->file('item_img')->store('item_imgs', 'public');
+
+       $user->items()->create([
+        'category_id' => $request->input('category'),
+        'condition'   => $request->input('condition'),
+        'item_name'   => $request->input('item_name'),
+        'brand_name'  => $request->input('brand_name'),
+        'description' => $request->input('description'),
+        'price'       => $request->input('price'),
+        'item_img'    => $path,
+        'is_sold'     => false,
+    ]);
+
+
+
+
+        return redirect('/mypage?page=sell');
     }
 
 /*     public function store(ProfileRequest $request)
