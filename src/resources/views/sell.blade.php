@@ -116,16 +116,6 @@
       </div>
 
       <button class="sell-form__button-submit" type="submit">出品する</button>
-
-
-
-
-
-
-
-
-
-
     </form>
   </div>
 </div>

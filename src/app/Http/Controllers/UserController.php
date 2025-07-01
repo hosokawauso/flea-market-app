@@ -8,9 +8,9 @@ use App\Http\Requests\AddressRequest;
 
 class UserController extends Controller
 {
-    
-    
-    
+
+
+
     public function edit()
     {
         return view('profile', ['user'=>Auth::user()]);

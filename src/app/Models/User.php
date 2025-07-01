@@ -51,11 +51,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function items()
+    public function favoriteItems()
     {
-        return $this->hasMany(Item::class);
+        return $this->belongsToMany(Item::class, 'favorites')->withTimestamps();
     }
-
     public function favorites()
     {
         return $this->hasMany(Favorite::class);

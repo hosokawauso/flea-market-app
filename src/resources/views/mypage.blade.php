@@ -35,6 +35,7 @@
       @if ($page === 'sell')
         @forelse ($sellingItems as $item)
           <div class="item-card">
+            <a href="/item/{{ $item->id }}" class="item-card">
             <img src="{{ asset('storage/' .$item->item_img)}}" alt="{{ $item->item_name}}">
             <p> {{ $item->item_name }}</p>
           </div>
@@ -45,6 +46,7 @@
       @elseif($page === 'buy')
         @forelse($purchasedItems as $item)
           <div class="item-card">
+            <a href="/item/{{ $item->id }}" class="item-card">
             <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
             <p>{{ $item->item_name }}</p>
           </div>

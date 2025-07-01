@@ -1,0 +1,29 @@
+.product-detail {
+  width: 80%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.product-image-area {
+  background-color: rgb(203, 224, 224);
+}
+
+.product-image-area img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid #ccc;
+}
+
+
+.product-description-area {
+ /*  background-color: rgb(114, 114, 145); */
+}
+
+.product-actions {
+  display: flex;
+}
+
+
+.favorite-button img

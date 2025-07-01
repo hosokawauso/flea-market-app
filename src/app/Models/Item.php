@@ -33,11 +33,6 @@ class Item extends Model
         return $this->belongsToMany(Category::class, 'category_item')->withTimestamps();
     }
 
-    public function favorites()
-    {
-        return $this->hasMany(Favorite::class);
-    }
-
     public function comments()
     {
         return $this->hasMany(Comments::class);
@@ -46,6 +41,11 @@ class Item extends Model
     public function purchase()
     {
         return $this->hasOne(Purchase::class);
+    }
+
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
     }
 
 }

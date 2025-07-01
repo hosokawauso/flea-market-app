@@ -44,6 +44,12 @@ class ItemController extends Controller
         
     }
 
+    public function show(Item $item)
+    {
+
+        return view('item', compact('item'));
+    }
+
     public function edit()
     {
         $categories = Category::all();
