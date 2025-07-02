@@ -1,29 +1,127 @@
 .product-detail {
-  width: 80%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 .product-image-area {
+
+
   background-color: rgb(203, 224, 224);
 }
 
 .product-image-area img {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   height: auto;
+  margin: 36px 45px;
   object-fit: contain;
   border: 1px solid #ccc;
 }
 
-
 .product-description-area {
- /*  background-color: rgb(114, 114, 145); */
+ padding: 50px;
 }
 
 .product-actions {
   display: flex;
 }
 
+.product-title {
+  font-size: 40px;
+  font-weight: bold;
+}
 
-.favorite-button img
+.brand_name {
+  font-size: 20px;
+}
+
+.price-area,
+.product-actions {
+  margin-top: 15px;
+}
+
+.price {
+  font-size: 40px;
+}
+
+.favorite-counter,
+.comments-counter {
+  margin-left: 30px;
+}
+
+h3 {
+  margin: 30px auto;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.product-info {
+  margin-top: 20px;
+}
+
+.category-info,
+.product-condition {
+  display: flex;
+  align-items: flex-start;
+  /* テキストの上部で揃える */
+  margin-bottom: 12px;
+}
+
+.info-label {
+  width: 120px;
+  /* ラベル幅を固定 */
+  font-weight: bold;
+}
+
+/* .info-value {
+  flex: 1;
+}
+ */
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-list li {
+  display: inline;
+  margin-right: 8px;
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: black;
+  background-color: rgb(192, 186, 186);
+}
+
+.condition {
+  padding: 0;
+  margin: 0;
+}
+
+.comments-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.comments-form__label {
+  margin-bottom: 8px;
+}
+
+.comments-form__textarea {
+  width: 100%;
+  min-height: 120px;
+}
+.purchase-box__button-submit,
+.comments-form__button-submit {
+  width: 100%;
+  height: 56px;
+  padding: 6px;
+  background-color: #f66;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  font-size: 25px;
+  cursor: pointer;
+}

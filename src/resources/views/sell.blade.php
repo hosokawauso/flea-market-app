@@ -64,12 +64,12 @@
             @enderror
           </p>
         </div>
-        <select class="sell-form__condition-select"  name="condition" value="{{ request('condition') }}">
+        <select class="sell-form__condition-select"  name="condition" value="{{ old('condition') }}">
           <option disabled selected>選択してください</option>
-          <option value="1" @if( request('condition')==1 ) selected @endif>良好</option>
-          <option value="2" @if( request('condition')==2 ) selected @endif>目立った傷や汚れなし</option>
-          <option value="3" @if( request('condition')==3 ) selected @endif>やや傷や汚れあり</option>
-          <option value="4" @if( request('condition')==4 ) selected @endif>状態が悪い</option>
+          <option value="1" @if( old('condition')==1 ) selected @endif>良好</option>
+          <option value="2" @if( old('condition')==2 ) selected @endif>目立った傷や汚れなし</option>
+          <option value="3" @if( old('condition')==3 ) selected @endif>やや傷や汚れあり</option>
+          <option value="4" @if( old('condition')==4 ) selected @endif>状態が悪い</option>
         </select>
       </div>
 
