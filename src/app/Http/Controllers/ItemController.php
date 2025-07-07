@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Http\Requests\ExhibitionRequest;
 
 class ItemController extends Controller
@@ -46,8 +47,11 @@ class ItemController extends Controller
 
     public function show(Item $item)
     {
+        $comments = $item->comments()->with('user')->get();
 
-        return view('item', compact('item'));
+        $item->load('comments.user');
+
+        return view('item', compact('item', 'comments'));
     }
 
     public function edit()
@@ -79,6 +83,8 @@ class ItemController extends Controller
 
         return redirect('/mypage?page=sell');
     }
+
+   
 
 /*     public function store(ProfileRequest $request)
     {

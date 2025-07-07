@@ -61,6 +61,10 @@
   font-weight: bold;
 }
 
+#preview alt {
+  font-size: 10px;
+}
+
 /* フォームグループ */
 .profile-form__group {
   margin-bottom: 20px;

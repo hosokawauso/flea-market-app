@@ -26,7 +26,7 @@ class ProfileRequest extends FormRequest
         return [
             'profile_img' => [
                 'file',
-                'mines:jpeg,png',
+                'mimes:jpeg,png',
                 'max:2048',
                 'nullable',
             ],

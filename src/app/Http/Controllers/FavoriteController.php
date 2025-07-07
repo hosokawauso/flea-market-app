@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Item;
+use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class LikeController extends Controller
+class FavoriteController extends Controller
 {
-    public function favoriteItem(Item $item)
+    public function toggle(Item $item)
     {
-        if(auth()->check()) {
+/*         if(auth()->check()) {
             return redirect('/login');
         }
-
+ */
         $user = Auth::user();
 
         if($user->favoriteItems()->where('item_id', $item->id)->exists()) {

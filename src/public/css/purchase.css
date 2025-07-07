@@ -1,0 +1,159 @@
+.purchase-screen {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.purchase-info {
+  grid-column: 2fr;
+  margin: 40px;
+}
+
+.confirm-surface {
+  grid-column: 1fr;
+
+}
+
+.purchase-info__inner {
+  display: flex;
+  padding-bottom: 30px;
+  border-bottom: 4px solid #ccc;
+}
+
+.product-image img {
+  width: 170px;
+  height: auto;
+}
+
+.product-info {
+  margin-left: 50px;
+}
+
+
+.product-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.yen {
+  font-size: 20px;
+}
+
+.price {
+  font-size: 30px;
+}
+
+.payment-method-area,
+.purchase-address-area {
+  height: 160px;
+  padding: 20px 30px 30px 30px;
+  border-bottom: 4px solid #ccc;
+}
+
+
+
+.payment-method-area__title {
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.payment-select {
+  width: 30%;
+  height: auto;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-left: 50px;
+  background-color: none;
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+.payment-select,
+::picker(select) {
+  appearance: base-select;
+}
+
+/* ドロップダウン部分全体 */
+::picker(select) {
+  border-radius: 10px;
+  background: white;
+  position: relative;
+  box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px,
+    rgba(15, 15, 15, 0.2) 0px 9px 24px;
+  width: 50%px;
+}
+
+/* option */
+.payment-select option {
+  background: white;
+  position: relative;
+}
+
+/* ホバー・フォーカスされているoption */
+.payment-select option:hover,
+.payment-select option:focus-visible {
+  background-color: rgba(55, 53, 47, 0.06);
+  outline: none;
+}
+
+.payment-select option[disabled] {
+  display: none;
+}
+
+.purchase-address-area__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.purchase-address-area__title{
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.postal-code,
+.address {
+  margin-left: 50px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.purchase-box__button-submit {
+  color: blue;
+}
+
+
+.summary__table {
+  width: 100%;
+  border-collapse: collapse;
+  border: solid 1px;
+}
+
+.summary__table th,td {
+  padding: 20px;
+  border-bottom: solid 1px;
+  height: 100px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.purchase-confirm__button-submit {
+  background-color: #ff6666;
+  color: #fff;
+  width: 100%;
+  padding: 10px 24px;
+  margin-top: 50px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}

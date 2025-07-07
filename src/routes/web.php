@@ -3,6 +3,8 @@
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', [ItemController::class,'index']);
@@ -18,4 +20,13 @@ Route::post('/sell', [ItemController::class, 'sell']);
 
 /* Route::get('/purchase/{item}', [PurchaseController::class, 'confirm']); */
 
-Route::get('/item/{item}/favorites', [LikeController::class, 'favoriteItem'])->name('item.favorite');
+Route::post('/item/{item}/favorites', [FavoriteController::class, 'toggle'])->name('item.favorite');
+
+Route::post('/item/{item}/comments', [CommentController::class, 'store'])->name('item.comment.store');
+
+Route::get('/purchase/{item}', [PurchaseController::class, 'confirm'])->name('purchase.confirm');
+
+Route::get('/purchase/address/{item}', [PurchaseController::class, 'update'])->name('purchase.address.update');
+
+Route::post('/purchase/{item}', [PurchaseController::class, 'purchase'])->name('item.purchase');
+

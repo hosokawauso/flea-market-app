@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AddressRequest;
+use App\Http\Requests\ProfileRequest;
+
 
 class UserController extends Controller
 {
@@ -18,21 +20,28 @@ class UserController extends Controller
 
     public function update(AddressRequest $request)
     {
-        /* $this->validate($request, (new ProfileRequest())->rules()); */
+        $this->validate($request, (new ProfileRequest())->rules());
 
         $user = Auth::user();
 
-        $user->fill($request->only(['profile_img', 'name', 'postal_code', 'address', 'building']));
+        $user->fill($request->only(['name', 'postal_code', 'address', 'building']));
 
-/*         if($request->hasFile('profile_img')) {
+        if($request->hasFile('profile_img')) {
             $path = $request->file('profile_img')->store('profile_imgs', 'public');
             $user->profile_img = $path;
         }
- */
+
         $user->is_profile_set = true;
         $user->save();
 
-        return redirect('/mypage');
+/*         dd([
+            'hasFile' => $request->hasFile('profile_img'),
+            'file'    => $request->file('profile_img'),
+            'path'    => $path ?? null,
+        ]);
+ */        
+
+        return back();
     }
 
     public function mypage(Request $request)

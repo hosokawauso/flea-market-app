@@ -30,25 +30,36 @@
 
     <div class="product-actions">
       <div class="favorite-counter">
+        <form class="inline" action="{{ route('item.favorite', $item) }}" method="post">
+          @csrf
         <button class="favorite-button">
           @if (Auth::check() && Auth::user()->favoriteItems->contains($item))
-          <img src="{{ asset('img/pushed.jpeg') }}" alt="いいね" >
-          @endif
+          <img src="{{ asset('img/selected.jpeg') }}" alt="いいね解除" >
+         @else
           <img src="{{ asset('img/star.jpeg') }}" alt="いいね" >
+          @endif
         </button>
-        <div class="favorite-count">{{ $item->favoritedBy()->count() }}</div>
+      </form>
+        <div class="favorite-count">
+          {{ $item->favoritedBy()->count() }}
+        </div>
       </div>
 
 
       <div class="comments-counter">
+        
         <img src="{{ asset('img/bubble.jpeg') }}" alt="comment" >
+      
+        <div class="comment-count">
+          {{ $item->comments->count() }}
+        </div>
       </div>
 
     </div>
 
 {{-- 購入ボタン：購入確認画面へ遷移 --}}
       <div class="purchase-area">
-        <form  class="purchase-box" action="#" method="get">
+        <form  class="purchase-box" action="{{ route('item.purchase', ['item' => $item->id]) }}" method="get">
           <div class="purchase-box__button">
             <input class="purchase-box__button-submit" type="submit" value="購入手続きへ">
           </div>
@@ -97,16 +108,36 @@
       </div>
 
     <div class="product-comments">
-      <h3>コメント</h3>
+      <h3>コメント({{ $comments->count() }})</h3>
     </div>
-    <div class="comment-list"></div>
+
+    <ul class="comment-list">
+    
+    @foreach ($comments as $comment)
+
+    <li class="comment-text">
+
+      <div class="comment-header">
+        @if (isset($user) && $user->profile_img)
+          <img id="preview" src="{{ asset('storage/' . $comment->user->profile_img) }}" alt="プロフィール画像">
+        @else
+          <div class="profile-img__placeholder">未設定</div>
+        @endif
+        <span class="comment-user">{{ $comment->user->name }}</span>
+      </div>
+      <p class="comment-body">{{ $comment->body }}</p>
+    </li>
+    @endforeach
+  </ul>
+
+    
       <div class="comment-text"></div>
 
     <div class="comment-input">
-      <form  class="comments-form" action="#" method="post">
+      <form  class="comments-form" action="{{ route('item.comment.store', ['item' => $item->id]) }}" method="post">
         @csrf
         <label class="comments-form__label" for="comment" >商品へのコメント</label>
-        <textarea class="comments-form__textarea"  name="comment" id="comment"></textarea>
+        <textarea class="comments-form__textarea"  name="body" id="comment" required>{{ old('body') }} </textarea>
 
           <div class="comments-form__button">
             <button class="comments-form__button-submit" type="submit">コメントを送信する</button>
