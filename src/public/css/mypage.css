@@ -108,7 +108,13 @@ a.active {
   text-align: left;
 }
 
-.item-img {
+.item-card img {
+  width: 200px;
+  height: auto;
+  object-fit: cover;
+}
+
+/* .item-img {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
@@ -120,7 +126,7 @@ a.active {
   height: 100%;
   object-fit: cover;
 }
-
+ */
 .sold-label {
   position: absolute;
   top: 8px;

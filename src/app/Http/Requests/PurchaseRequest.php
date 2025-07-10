@@ -24,20 +24,20 @@ class PurchaseRequest extends FormRequest
     public function rules()
     {
         return [
-            'method' => ['required'],
-            'postal_code' => ['required', 'regex:/^\d{3}-d{4}$/'],
-            'address' => ['required'],
-            'building' => ['nullable'],
+            'paymentMethod' => ['required'],
+            'purchase_postal_code' => ['required', 'regex:/^\d{3}-\d{4}$/'],
+            'purchase_address' => ['required'],
+            'purchase_building' => ['nullable'],
         ];
     }
 
-    public function message()
+    public function messages()
     {
         return [
-            'method.required' => '支払い方法を選択してください',
-            'postal_code.required' => '郵便番号を入力してください',
-            'postal_code.regex' => 'ハイフン(-)を含めた8文字で入力してください',
-            'address' => '住所を入力してください',
+            'paymentMethod.required' => '支払い方法を選択してください',
+            'purchase_postal_code.required' => '郵便番号を入力してください',
+            'purchase_postal_code.regex' => 'ハイフン(-)を含めた8文字で入力してください',
+            'purchase_address.required' => '住所を入力してください',
 
         ];
     }

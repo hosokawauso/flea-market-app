@@ -5,6 +5,14 @@
 @endsection
 
 @section('content')
+
+
+  <livewire:purchase-page :item="$item"/>
+
+{{-- @livewire('payment-method') --}}
+@endsection
+
+
 {{-- <div class="purchase-screen">
  --}}
 {{--   <div class="purchase-info">
@@ -86,6 +94,3 @@
  --}}
 
 {{-- </div> --}}
-<livewire:payment-method :item="$item" :user="Auth::user()"/>
-{{-- @livewire('payment-method') --}}
-@endsection

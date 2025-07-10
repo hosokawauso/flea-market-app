@@ -16,10 +16,15 @@
         <div class="item-card">
           <div class="item-img">
             <a href="/item/{{ $item->id }}" class="item-card">
-            <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
-            @if ($item->is_sold)
+              @if (Str::startsWith($item->item_img, 'http'))
+              <img src="{{ $item->item_img }}" alt="{{ $item->item_name }}">
+          @else
+              <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
+          @endif
+  @if ($item->is_sold)
             <span class="sold-label">Sold</span>
             @endif
+            </a>
           </div>
           <p>{{ $item->item_name }}</p>
         </div>
@@ -34,6 +39,7 @@
           @if ($item->is_sold)
           <span class="sold-label">Sold</span>
           @endif
+          </a>
         </div>
         <p>{{ $item->item_name }}</p>
       </div>

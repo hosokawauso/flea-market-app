@@ -4,23 +4,21 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.product-image-area {
-
-
-  background-color: rgb(203, 224, 224);
+.product-image {
+  grid-column: 1/2;
+  display: flex;
+  justify-content: center;
 }
 
-.product-image-area img {
-  width: 100%;
-  max-width: 600px;
+.product-image img {
+  width: 500px;
   height: auto;
-  margin: 36px 45px;
-  object-fit: contain;
-  border: 1px solid #ccc;
+  padding: 50px;
 }
 
 .product-description-area {
- padding: 50px;
+  grid-column: 2/3;
+  padding: 50px;
 }
 
 .product-actions {

@@ -41,7 +41,7 @@ class UserController extends Controller
         ]);
  */        
 
-        return back();
+        return redirect('/mypage');
     }
 
     public function mypage(Request $request)

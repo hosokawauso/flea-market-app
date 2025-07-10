@@ -35,9 +35,12 @@
       @if ($page === 'sell')
         @forelse ($sellingItems as $item)
           <div class="item-card">
-            <a href="/item/{{ $item->id }}" class="item-card">
-            <img src="{{ asset('storage/' .$item->item_img)}}" alt="{{ $item->item_name}}">
-            <p> {{ $item->item_name }}</p>
+            @if (Str::startsWith($item->item_img, 'http'))
+            <img src="{{ $item->item_img }}" alt="{{ $item->item_name }}">
+        @else
+            <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
+        @endif
+          <p> {{ $item->item_name }}</p>
           </div>
         @empty
           <p class="empty-message">出品した商品はありません。</p>
@@ -46,7 +49,6 @@
       @elseif($page === 'buy')
         @forelse($purchasedItems as $item)
           <div class="item-card">
-            <a href="/item/{{ $item->id }}" class="item-card">
             <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
             <p>{{ $item->item_name }}</p>
           </div>

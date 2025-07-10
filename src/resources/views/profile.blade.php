@@ -8,19 +8,18 @@
 <div class="profile">
   <h2 class="profile__title">プロフィール設定</h2>
   <div class="profile__inner">
-    <form class="profile-form__form" action="/mypage" method="post" enctype="multipart/form-data">
+    <form class="profile-form__form" action="/mypage/profile" method="post" enctype="multipart/form-data">
       @csrf
-      @method('PATCH')
       <div class="profile-img">
-        @if (isset($user) && $user->profile_img)
+        {{-- @if (isset($user) && $user->profile_img) --}}
           <label for="profile_img">
             <img id="preview" src="{{ asset('storage/' . $user->profile_img) }}" alt="プロフィール画像">
           </label>
-        @else
+       {{--  @else
           <label for="profile_img">
             <div class="profile-img__placeholder">未設定</div>
           </label>
-        @endif
+        @endif --}}
           <input type="file" id="profile_img" name="profile_img" accept="image/" hidden>
           <label class="upload-button" for="profile_img">画像を選択する</label>
       </div>

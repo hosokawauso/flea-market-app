@@ -15,7 +15,7 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('method')->comment('1:コンビニ払い, 2:カード支払い');
+            $table->string('method');
             $table->string('stripe_payment_id')->unique()->nullable()->comment('Stripeの支払いID');
             $table->integer('amount');
             $table->timestamps();
@@ -32,3 +32,4 @@ class CreatePaymentsTable extends Migration
         Schema::dropIfExists('payments');
     }
 }
+

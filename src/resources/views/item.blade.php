@@ -6,10 +6,15 @@
 
 @section('content')
 <div class="product-detail">
+  
   <div class="product-image-area">
     <div class="product-image">
-{{--       <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
- --}}       <img src="https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Armani+Mens+Clock.jpg" alt="image">      </div>
+      @if (Str::startsWith($item->item_img, 'http'))
+      <img src="{{ $item->item_img }}" alt="{{ $item->item_name }}">
+      @else
+      <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
+      @endif
+    </div>
   </div>
 
 

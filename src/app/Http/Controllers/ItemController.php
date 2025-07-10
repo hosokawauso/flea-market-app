@@ -26,7 +26,7 @@ class ItemController extends Controller
                 $query->where('user_id', '!=', Auth::id());
             }
 
-            $recommendItems = $query->inRandomOrder()->limit(8)->get();
+            $recommendItems = $query->inRandomOrder()->get();
 
         }
 

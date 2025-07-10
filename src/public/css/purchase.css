@@ -1,21 +1,31 @@
 .purchase-screen {
   width: 100%;
+  padding: 40px;
   display: grid;
+  grid-template-rows: 450px 300px;
   grid-template-columns: 2fr 1fr;
 }
 
 .purchase-info {
-  grid-column: 2fr;
+  grid-row: 1/2;
+  grid-column: 1/2;
   margin: 40px;
 }
 
-.confirm-surface {
-  grid-column: 1fr;
+.purchase-address-area {
+  grid-row: 2/3;
+  grid-column: 1/2;
+  margin: 0 40px;
+}
 
+.confirm-surface {
+  grid-row: 1/2;
+  grid-column: 2/3;
 }
 
 .purchase-info__inner {
   display: flex;
+  height: 200px;
   padding-bottom: 30px;
   border-bottom: 4px solid #ccc;
 }
@@ -44,9 +54,8 @@
   font-size: 30px;
 }
 
-.payment-method-area,
-.purchase-address-area {
-  height: 160px;
+.payment-method-area {
+  height: 180px;
   padding: 20px 30px 30px 30px;
   border-bottom: 4px solid #ccc;
 }
