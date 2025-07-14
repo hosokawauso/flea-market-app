@@ -17,6 +17,7 @@ Route::get('/mypage', [UserController::class, 'mypage'])->middleware('auth');
 Route::get('/', [ItemController::class, 'index']);
 Route::get('/sell', [ItemController::class, 'edit']);
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
+Route::get('/search', [ItemController::class, 'search']);
 Route::post('/sell', [ItemController::class, 'sell']);
 
 
@@ -25,10 +26,7 @@ Route::post('/item/{item}/favorites', [FavoriteController::class, 'toggle'])->na
 Route::post('/item/{item}/comments', [CommentController::class, 'store'])->name('item.comment.store');
 
 Route::get('/purchase/{item}', [PurchaseController::class, 'confirm'])->name('purchase.confirm');
-
 Route::get('/purchase/address/{item}', [PurchaseController::class, 'edit'])->name('purchase.address.edit');
-
 Route::post('/purchase/address/{item}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
-
 Route::post('/purchase/{item}', [PurchaseController::class, 'purchase'])->name('item.purchase');
 

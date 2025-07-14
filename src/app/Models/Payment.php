@@ -21,7 +21,7 @@ class Payment extends Model
     }
  */
 
-    protected $guarded = [
+    protected $fillable = [
         'method',
         'amount',
         'stripe_payment_id'

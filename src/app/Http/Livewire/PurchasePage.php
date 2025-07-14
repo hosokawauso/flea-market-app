@@ -56,12 +56,12 @@ class PurchasePage extends Component
 
     }
 
-    public function getSelectedPaymentMethodLabelProperty(): string
+/*     public function getSelectedPaymentMethodLabelProperty(): string
     {
         $payment = Payment::find($this->paymentMethod);
         return $payment ? $payment->method : '未選択';
     }
-
+ */
     public function toggleAddress(): void
     {
         $this->changeAddress = !$this->changeAddress;
@@ -92,7 +92,6 @@ class PurchasePage extends Component
     {
         $this->validate();
 
-        dd(リクエスト到達);
         
         $purchase = session('purchase_address') ?? [
             'postal_code' => Auth::user()->postal_code,
@@ -100,17 +99,23 @@ class PurchasePage extends Component
             'building' => Auth::user()->building,
         ];
 
-        $payment = Payment::where('method', $this->paymentMethod);
+        $payment = Payment::where('method', $this->paymentMethod)->first();
        
         
         Purchase::create([
             'user_id' => Auth::id(),
             'item_id' => $this->item->id,
             'payment_id' =>$payment->id,
-            'purchase_postal_code' => $this->purchase['postal_code'],
-            'purchase_address' => $this->purchase['address'],
-            'purchase_building' => $this->purchase['building'],
+            'purchase_postal_code' => $purchase['postal_code'],
+            'purchase_address' => $purchase['address'],
+            'purchase_building' => $purchase['building'],
         ]);
+
+        /* Item::where('id', $this->item->id)->update(['is_sold' => true]); */
+
+        $item = Item::find($this->item->id);
+        $item->is_sold = true;
+        $item->save();
 
         session()->forget('purchase_address');
 

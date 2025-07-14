@@ -16,12 +16,8 @@
         <div class="item-card">
           <div class="item-img">
             <a href="/item/{{ $item->id }}" class="item-card">
-              @if (Str::startsWith($item->item_img, 'http'))
-              <img src="{{ $item->item_img }}" alt="{{ $item->item_name }}">
-          @else
-              <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
-          @endif
-  @if ($item->is_sold)
+              <img src="{{ asset('storage/' . rawurlencode($item->item_img)) }}" alt="{{ $item->item_name }}">
+            @if ($item->is_sold)
             <span class="sold-label">Sold</span>
             @endif
             </a>
@@ -35,7 +31,7 @@
       <div class="item-card">
         <div class="item-img">
           <a href="/item/{{ $item->id }}" class="item-card">
-          <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
+            <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
           @if ($item->is_sold)
           <span class="sold-label">Sold</span>
           @endif

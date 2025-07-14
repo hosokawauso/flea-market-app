@@ -16,12 +16,18 @@ class Item extends Model
         'brand_name',
         'description',
         'price',
+        'is_sold',
     ];
 
-    protected $guarded = [
-        'is_sold',
-        'id'
-    ];
+    public function scopeSearchItemName($query, $keyword)
+    {
+        if(!empty($keyword)) {
+            $query->where('item_name', 'like', '%' . $keyword . '%');
+        }
+
+        return $query;
+    }
+
 
     public function user()
     {

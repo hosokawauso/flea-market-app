@@ -15,10 +15,6 @@ class Comment extends Model
         'item_id'
     ];
 
-    protected $guarded = [
-        'id'
-    ];
-
     public function user()
     {
         return $this->belongsTo(User::class);

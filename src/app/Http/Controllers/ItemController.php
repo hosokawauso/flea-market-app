@@ -84,7 +84,6 @@ class ItemController extends Controller
         return redirect('/mypage?page=sell');
     }
 
-   
 
 /*     public function store(ProfileRequest $request)
     {
@@ -99,13 +98,17 @@ class ItemController extends Controller
         return redirect('/mypage');
     }
  */
-/*     public function search(Request $request)
+    public function search(Request $request)
     {
-    $keyword = $request->input('keyword');
-    $items = Item::where('name', 'like', "%{$keyword}%")->get();
+        $keyword = $request->input('keyword');
+        
+        $items = Item::searchItemName($keyword)->get();
 
-    return view('search', compact('items'));
+        return view('index', [
+            'recommendItems' => $items,
+            'favoriteItems' => collect(),
+            'page' => 'recommend',
+        ]);
     }
- */
 
 }

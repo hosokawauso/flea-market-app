@@ -64,11 +64,17 @@
 
 {{-- 購入ボタン：購入確認画面へ遷移 --}}
       <div class="purchase-area">
-        <form  class="purchase-box" action="{{ route('item.purchase', ['item' => $item->id]) }}" method="get">
-          <div class="purchase-box__button">
-            <input class="purchase-box__button-submit" type="submit" value="購入手続きへ">
+{{--         <form  class="purchase-box" action="{{ route('item.purchase', ['item' => $item->id]) }}" method="get">
+ --}}           <div class="purchase-box__button">
+            {{-- <input class="purchase-box__button-submit" type="submit" value="購入手続きへ"> --}}
+          @if (!$item->purchase)
+            <a href="{{ route('item.purchase', ['item' => $item->id]) }}" class="purchase-procedure">購入する</a>
+          @else
+            <p class="sold-out" >SOLD</p>              
+          @endif
+
           </div>
-        </form>
+         {{-- </form> --}}
       </div>
 
       <div class="product-description">

@@ -25,7 +25,7 @@
                         class="payment-select" name="payment-select" id="payment-select">
                     <option disabled  selected>選択してください</option>
                         @foreach($payments as $payment)
-                        <option value="{{ $payment->id }}">{{ $payment->method }}</option>
+                        <option value="{{ $payment->method }}">{{ $payment->method }}</option>
                         @endforeach
                 </select>
             </div>
@@ -68,7 +68,7 @@
                 <tr>
                     <th>支払い方法</th>
                     <td>
-                        {{ $this->selectedPaymentMethodLabel }}
+                        {{ $this->paymentMethod }}
                     </td>
                 </tr>
             </table>

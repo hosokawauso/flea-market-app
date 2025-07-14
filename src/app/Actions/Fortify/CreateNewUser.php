@@ -21,10 +21,9 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'name' => ['required'],
-            'email' => [
-                'required', 'email'],
+            'email' => ['required', 'email'],
             'password' => $this->passwordRules(),
-            'password' => ['required', 'min:8'],
+            'password' => ['required', 'min:8', 'confirmed'],
             /* 'password_confirmation' => ['required', 'confirmed'], */
         ])->validate();
             

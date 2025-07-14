@@ -49,7 +49,11 @@
       @elseif($page === 'buy')
         @forelse($purchasedItems as $item)
           <div class="item-card">
-            <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
+            @if (Str::startsWith($item->item_img, 'http'))
+              <img src="{{ $item->item_img }}" alt="{{ $item->item_name }}">
+            @else
+              <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
+            @endif
             <p>{{ $item->item_name }}</p>
           </div>
           @empty
