@@ -15,10 +15,10 @@ Route::get('/mypage', [UserController::class, 'mypage'])->middleware('auth');
 
 
 Route::get('/', [ItemController::class, 'index']);
-Route::get('/sell', [ItemController::class, 'edit']);
+Route::get('/sell', [ItemController::class, 'edit'])->middleware('auth');;
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
 Route::get('/search', [ItemController::class, 'search']);
-Route::post('/sell', [ItemController::class, 'sell']);
+Route::post('/sell', [ItemController::class, 'sell'])->middleware('auth');;
 
 
 Route::post('/item/{item}/favorites', [FavoriteController::class, 'toggle'])->name('item.favorite');
