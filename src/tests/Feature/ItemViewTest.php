@@ -32,7 +32,7 @@ class ItemViewTest extends TestCase
             'price' => 1000,
             'description' =>'これは商品の説明です',
             'item_img' => 'item_imgs/default.png',
-            'condition' => 1, //商品状態(良好)
+            'condition' => 3,
             'is_sold' => false,
         ]);
 
@@ -62,8 +62,8 @@ class ItemViewTest extends TestCase
         foreach($categories as $category) {
             $response->assertSee($category->content);
         }
-        
-        //「いいね」の数//
+
+        //「いいね」の数
         $response->assertSeeText('1');
 
         $response->assertSee('これは商品に対するコメントです');

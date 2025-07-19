@@ -15,18 +15,18 @@ Route::get('/mypage', [UserController::class, 'mypage'])->middleware('auth');
 
 
 Route::get('/', [ItemController::class, 'index']);
-Route::get('/sell', [ItemController::class, 'edit'])->middleware('auth');;
+Route::get('/sell', [ItemController::class, 'edit'])->middleware('auth');
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
 Route::get('/search', [ItemController::class, 'search']);
 Route::post('/sell', [ItemController::class, 'sell'])->middleware('auth');;
 
 
-Route::post('/item/{item}/favorites', [FavoriteController::class, 'toggle'])->name('item.favorite');
+Route::post('/item/{item}/favorites', [FavoriteController::class, 'toggle'])->middleware('auth')->name('item.favorite');
 
-Route::post('/item/{item}/comments', [CommentController::class, 'store'])->name('item.comment.store');
+Route::post('/item/{item}/comments', [CommentController::class, 'store'])->middleware('auth')->name('item.comment.store');
 
-Route::get('/purchase/{item}', [PurchaseController::class, 'confirm'])->name('purchase.confirm');
-Route::get('/purchase/address/{item}', [PurchaseController::class, 'edit'])->name('purchase.address.edit');
+Route::get('/purchase/{item}', [PurchaseController::class, 'confirm'])->middleware('auth')->name('purchase.confirm');
+Route::get('/purchase/address/{item}', [PurchaseController::class, 'edit'])->middleware('auth')->name('purchase.address.edit');
 Route::post('/purchase/address/{item}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
 Route::post('/purchase/{item}', [PurchaseController::class, 'purchase'])->name('item.purchase');
 

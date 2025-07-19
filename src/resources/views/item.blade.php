@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="product-detail">
-  
+
   <div class="product-image-area">
     <div class="product-image">
       @if (Str::startsWith($item->item_img, 'http'))
@@ -40,7 +40,7 @@
         <button class="favorite-button">
           @if (Auth::check() && Auth::user()->favoriteItems->contains($item))
           <img src="{{ asset('img/selected.jpeg') }}" alt="いいね解除" >
-         @else
+          @else
           <img src="{{ asset('img/star.jpeg') }}" alt="いいね" >
           @endif
         </button>
@@ -52,9 +52,9 @@
 
 
       <div class="comments-counter">
-        
+
         <img src="{{ asset('img/bubble.jpeg') }}" alt="comment" >
-      
+
         <div class="comment-count">
           {{ $item->comments->count() }}
         </div>
@@ -65,12 +65,12 @@
 {{-- 購入ボタン：購入確認画面へ遷移 --}}
       <div class="purchase-area">
 {{--         <form  class="purchase-box" action="{{ route('item.purchase', ['item' => $item->id]) }}" method="get">
- --}}           <div class="purchase-box__button">
+--}}           <div class="purchase-box__button">
             {{-- <input class="purchase-box__button-submit" type="submit" value="購入手続きへ"> --}}
           @if (!$item->purchase)
             <a href="{{ route('item.purchase', ['item' => $item->id]) }}" class="purchase-procedure">購入する</a>
           @else
-            <p class="sold-out" >SOLD</p>              
+            <p class="sold-out" >Sold</p>
           @endif
 
           </div>
@@ -141,7 +141,7 @@
     @endforeach
   </ul>
 
-    
+
       <div class="comment-text"></div>
 
     <div class="comment-input">
@@ -149,6 +149,12 @@
         @csrf
         <label class="comments-form__label" for="comment" >商品へのコメント</label>
         <textarea class="comments-form__textarea"  name="body" id="comment" required>{{ old('body') }} </textarea>
+        <p class="register-form__error-message">
+          @error('body')
+          {{ $message }}
+          @enderror
+        </p>
+
 
           <div class="comments-form__button">
             <button class="comments-form__button-submit" type="submit">コメントを送信する</button>

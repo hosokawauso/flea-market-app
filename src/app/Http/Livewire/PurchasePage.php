@@ -52,7 +52,7 @@ class PurchasePage extends Component
 
     public function getPaymentLabelProperty(): string
     {
-        return $this->paymentMethod ?: '未選択';        
+        return $this->paymentMethod ?: '未選択';
 
     }
 
@@ -93,15 +93,16 @@ class PurchasePage extends Component
         $this->validate();
 
         
-        $purchase = session('purchase_address') ?? [
+        /* $purchase = session('purchase_address') ?? [
             'postal_code' => Auth::user()->postal_code,
             'address' => Auth::user()->address,
             'building' => Auth::user()->building,
-        ];
+        ]; */
 
         $payment = Payment::where('method', $this->paymentMethod)->first();
-       
-        
+
+        $purchase = $this->purchase;
+
         Purchase::create([
             'user_id' => Auth::id(),
             'item_id' => $this->item->id,
@@ -119,7 +120,7 @@ class PurchasePage extends Component
 
         session()->forget('purchase_address');
 
-        return redirect('/mypage');
+        return redirect('/mypage?page=buy');
     }
 
     public function render()

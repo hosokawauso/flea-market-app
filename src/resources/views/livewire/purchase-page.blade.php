@@ -23,7 +23,7 @@
                 <div class="payment-method-area__title">支払い方法</div>
                 <select wire:model = "paymentMethod"
                         class="payment-select" name="payment-select" id="payment-select">
-                    <option disabled  selected>選択してください</option>
+                    <option value="" disabled  selected>選択してください</option>
                         @foreach($payments as $payment)
                         <option value="{{ $payment->method }}">{{ $payment->method }}</option>
                         @endforeach
@@ -55,7 +55,7 @@
                     </div>
                     @endif
         </div>
-       
+
 
         <div class="confirm-surface">
             <table class="summary__table">
@@ -68,7 +68,7 @@
                 <tr>
                     <th>支払い方法</th>
                     <td>
-                        {{ $this->paymentMethod }}
+                        {{ $this->paymentMethod ?: '未選択' }}
                     </td>
                 </tr>
             </table>
@@ -77,9 +77,7 @@
                 購入する
             </button>
         </div>
-
     </div>
-    
 </div>
 
 

@@ -12,7 +12,7 @@ use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
-    public function store(Item $item, CommentRequest $request)
+    public function store(CommentRequest $request, Item $item)
     {
         $user = Auth::user();
 
