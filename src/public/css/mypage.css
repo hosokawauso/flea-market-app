@@ -18,6 +18,19 @@
   gap: 16px;
 }
 
+#preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+}
+
 .profile-img img,
 .profile-img__placeholder {
   width: 100px;

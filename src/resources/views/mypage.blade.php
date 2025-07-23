@@ -8,10 +8,10 @@
 <div class="mypage">
   <div class="mypage__heading">
     <div class="profile-img__info">
-      @if (isset($user) && $user->profile_img)
-        <label for="profile_img">
-        <img id="preview" src="{{ asset('storage/' . $user->profile_img) }}" alt="プロフィール画像">
-        </label>
+    @if (!empty($user->profile_img))
+      <label for="profile_img">
+      <img id="preview" src="{{ asset('storage/' . $user->profile_img) }}" alt="プロフィール画像">
+      </label>
       @else
         <label for="profile_img">
         <div class="profile-img__placeholder">未設定</div>
@@ -35,11 +35,7 @@
       @if ($page === 'sell')
         @forelse ($sellingItems as $item)
           <div class="item-card">
-            @if (Str::startsWith($item->item_img, 'http'))
-            <img src="{{ $item->item_img }}" alt="{{ $item->item_name }}">
-        @else
             <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
-        @endif
           <p> {{ $item->item_name }}</p>
           </div>
         @empty
@@ -49,11 +45,7 @@
       @elseif($page === 'buy')
         @forelse($purchasedItems as $item)
           <div class="item-card">
-            @if (Str::startsWith($item->item_img, 'http'))
-              <img src="{{ $item->item_img }}" alt="{{ $item->item_name }}">
-            @else
               <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
-            @endif
             <p>{{ $item->item_name }}</p>
           </div>
           @empty

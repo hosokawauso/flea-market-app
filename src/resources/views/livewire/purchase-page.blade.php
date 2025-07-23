@@ -2,11 +2,7 @@
     <div class="purchase-info">
             <div class="purchase-info__inner">
                 <div class="product-image">
-                    @if (Str::startsWith($item->item_img, 'http'))
-                        <img src="{{ $item->item_img }}" alt="{{ $item->item_name }}">
-                    @else
                         <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
-                    @endif
                 </div>
                 <div class="product-info">
                     <div class="product-title">
@@ -20,7 +16,7 @@
             </div>
 
             <div class="payment-method-area">
-                <div class="payment-method-area__title">支払い方法</div>
+                <p class="payment-method-area__title">支払い方法</p>
                 <select wire:model = "paymentMethod"
                         class="payment-select" name="payment-select" id="payment-select">
                     <option value="" disabled  selected>選択してください</option>
@@ -29,32 +25,30 @@
                         @endforeach
                 </select>
             </div>
-        </div>
+
 
         <div class="purchase-address-area">
+            <div class="purchase-address-area__header">
+                <div class="purchase-address-area__title">配送先</div>
+                <a class="purchase-address-area__btn" href="{{ route('purchase.address.edit',['item' => $item->id] )}}">変更する</a>
+            </div>
 
-                    <div class="purchase-address-area__title">配送先</div>
+            @if ($changeAddress)
+            @include('purchase-address', ['purchase' => $purchase])
 
-
-                    <div class="purchase-box__button">
-                    <a href="{{ route('purchase.address.edit',['item' => $item->id] )}}">変更する</a>
-                    </div>
-
-                    @if ($changeAddress)
-                    @include('purchase-address', ['purchase' => $purchase])
-
-                    @else
-                    <div class="purchase-address">
-                    <div class="postal-code">
-                        <span>〒</span>
-                        {{ $purchase['postal_code'] }}
-                    </div>
-                    <div class="address">
-                    {{ $purchase['address'] }}{{ $purchase['building'] }}
-                    </div>
-                    </div>
-                    @endif
+            @else
+            <div class="purchase-address">
+                <div class="postal-code">
+                <span>〒</span>
+                {{ $purchase['postal_code'] }}
+                </div>
+                <div class="address">
+                {{ $purchase['address'] }}{{ $purchase['building'] }}
+                </div>
+            </div>
+            @endif
         </div>
+    </div>
 
 
         <div class="confirm-surface">

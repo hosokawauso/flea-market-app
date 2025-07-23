@@ -49,7 +49,7 @@ class ItemController extends Controller
     {
         $comments = $item->comments()->with('user')->get();
 
-        $item->load('comments.user');
+        $item->load(['categories', 'comments.user']);
 
         return view('item', compact('item', 'comments'));
     }
@@ -57,7 +57,7 @@ class ItemController extends Controller
     public function edit()
     {
         $categories = Category::all();
-        
+
         return view('sell', compact('categories'));
     }
 
@@ -65,21 +65,19 @@ class ItemController extends Controller
     {
         $user = Auth::user();
 
-       $path = $request->file('item_img')->store('item_imgs', 'public');
+        $path = $request->file('item_img')->store('item_imgs', 'public');
 
-       $user->items()->create([
-        'category_id' => $request->input('category'),
-        'condition'   => $request->input('condition'),
-        'item_name'   => $request->input('item_name'),
-        'brand_name'  => $request->input('brand_name'),
-        'description' => $request->input('description'),
-        'price'       => $request->input('price'),
-        'item_img'    => $path,
-        'is_sold'     => false,
-    ]);
+        $item = $user->items()->create([
+            'condition'   => $request->input('condition'),
+            'item_name'   => $request->input('item_name'),
+            'brand_name'  => $request->input('brand_name'),
+            'description' => $request->input('description'),
+            'price'       => $request->input('price'),
+            'item_img'    => $path,
+            'is_sold'     => false,
+        ]);
 
-
-
+        $item->categories()->attach($request->input('category'));
 
         return redirect('/mypage?page=sell');
     }

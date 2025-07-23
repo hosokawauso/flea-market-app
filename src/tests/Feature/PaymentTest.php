@@ -14,6 +14,7 @@ use App\Models\Payment;
 
 class PaymentTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *

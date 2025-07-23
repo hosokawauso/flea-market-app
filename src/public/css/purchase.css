@@ -2,32 +2,42 @@
   width: 100%;
   padding: 40px;
   display: grid;
-  grid-template-rows: 450px 300px;
+  grid-template-rows: 250px 200px 200px;
   grid-template-columns: 2fr 1fr;
 }
 
 .purchase-info {
+  margin: 0 40px;
+}
+
+.purchase-info__inner {
   grid-row: 1/2;
   grid-column: 1/2;
-  margin: 40px;
+  display: flex;
+  height: 215px;
+  padding-bottom: 40px;
+  border-bottom: 4px solid #ccc;
+}
+
+.payment-method-area {
+  grid-row: 1/2;
+  grid-column: 2/3;
+  height: 180px;
+  padding: 20px 30px 30px 30px;
+  border-bottom: 4px solid #ccc;
 }
 
 .purchase-address-area {
-  grid-row: 2/3;
-  grid-column: 1/2;
-  margin: 0 40px;
+  grid-row: 1/2;
+  grid-column: 3/4;
+  height: 180px;
+  padding: 20px 30px 30px 30px;
+  border-bottom: 4px solid #ccc;
 }
 
 .confirm-surface {
   grid-row: 1/2;
   grid-column: 2/3;
-}
-
-.purchase-info__inner {
-  display: flex;
-  height: 200px;
-  padding-bottom: 30px;
-  border-bottom: 4px solid #ccc;
 }
 
 .product-image img {
@@ -54,14 +64,7 @@
   font-size: 30px;
 }
 
-.payment-method-area {
-  height: 180px;
-  padding: 20px 30px 30px 30px;
-  border-bottom: 4px solid #ccc;
-}
-
-
-
+/* 支払い方法 */
 .payment-method-area__title {
   margin-bottom: 30px;
   font-size: 20px;
@@ -117,15 +120,22 @@
   display: none;
 }
 
+/* 配送先確認画面 */
 .purchase-address-area__header {
+  margin-bottom: 30px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.purchase-address-area__title{
-  margin-bottom: 30px;
+.purchase-address-area__title {
   font-size: 20px;
   font-weight: bold;
+}
+
+.purchase-address-area__btn {
+  font-size: 18px;
+  text-decoration: none;
 }
 
 .postal-code,
@@ -135,11 +145,11 @@
   font-weight: bold;
 }
 
-.purchase-box__button-submit {
-  color: blue;
+.purchase-box__button a {
+  text-decoration: none;
 }
 
-
+/*購入確認小画面*/
 .summary__table {
   width: 100%;
   border-collapse: collapse;

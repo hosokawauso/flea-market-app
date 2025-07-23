@@ -68,7 +68,7 @@
 --}}           <div class="purchase-box__button">
             {{-- <input class="purchase-box__button-submit" type="submit" value="購入手続きへ"> --}}
           @if (!$item->purchase)
-            <a href="{{ route('item.purchase', ['item' => $item->id]) }}" class="purchase-procedure">購入する</a>
+            <a href="{{ route('item.purchase', ['item' => $item->id]) }}" class="purchase-procedure">購入手続きへ</a>
           @else
             <p class="sold-out" >Sold</p>
           @endif
@@ -101,17 +101,17 @@
             <div class="condition">
               @switch($item->condition)
               @case(1)
-                  良好
-                  @break
+                良好
+                @break
               @case(2)
-                  目立った傷や汚れなし
-                  @break
+                目立った傷や汚れなし
+                @break
               @case(3)
-                  やや傷や汚れあり
-                  @break
+                やや傷や汚れあり
+                @break
               @case(4)
-                  状態が悪い
-                  @break
+                状態が悪い
+                @break
               @endswitch       
             </div>
         </div>
@@ -129,7 +129,7 @@
     <li class="comment-text">
 
       <div class="comment-header">
-        @if (isset($user) && $user->profile_img)
+        @if(!empty($comment->user->profile_img))
           <img id="preview" src="{{ asset('storage/' . $comment->user->profile_img) }}" alt="プロフィール画像">
         @else
           <div class="profile-img__placeholder">未設定</div>

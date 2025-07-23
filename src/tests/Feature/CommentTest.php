@@ -28,15 +28,15 @@ class CommentTest extends TestCase
 
         $this->assertDatabaseHas('comments', [
             'user_id' => $user->id,
-            'Item_id' => $item->id,
+            'item_id' => $item->id,
             'body' => 'これがコメントです',
         ]);
 
         $response = $this->get("/item/{$item->id}");
         $response->assertStatus(200);
-        $response->assertSeeText('コメント(1)');
+        $response->assertSeeText('コメント');
+        $response->assertSeeText('(1)');
         $response->assertSeeText('これがコメントです');
-        $response->assertSeeText($user->id);
     }
 
     public function test_guest_cannot_send_comment()

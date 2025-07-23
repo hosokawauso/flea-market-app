@@ -11,16 +11,16 @@
     <form class="profile-form__form" action="/mypage/profile" method="post" enctype="multipart/form-data">
       @csrf
       <div class="profile-img">
-        {{-- @if (isset($user) && $user->profile_img) --}}
+        @if (!empty($user->profile_img))
           <label for="profile_img">
             <img id="preview" src="{{ asset('storage/' . $user->profile_img) }}" alt="プロフィール画像">
           </label>
-       {{--  @else
+        @else
           <label for="profile_img">
             <div class="profile-img__placeholder">未設定</div>
           </label>
-        @endif --}}
-          <input type="file" id="profile_img" name="profile_img" accept="image/" hidden>
+        @endif
+          <input type="file" id="profile_img" name="profile_img" accept="image/*" hidden>
           <label class="upload-button" for="profile_img">画像を選択する</label>
       </div>
       <div class="profile-form__group">

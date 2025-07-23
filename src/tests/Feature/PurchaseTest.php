@@ -64,7 +64,7 @@ class PurchaseTest extends TestCase
             'amount' => 1000,
         ]);
 
-        $purchase= [
+        $purchase = [
             'postal_code' =>'760-0080',
             'address' => '香川県高松市サンポート2-1',
             'building' => 'マリンタイムプラザ30階',

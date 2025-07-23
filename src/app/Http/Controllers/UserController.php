@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function update(AddressRequest $request)
     {
-        $this->validate($request, (new ProfileRequest())->rules());
+       $this->validate($request, (new ProfileRequest())->rules());
 
         $user = Auth::user();
 
@@ -34,12 +34,13 @@ class UserController extends Controller
         $user->is_profile_set = true;
         $user->save();
 
+
 /*         dd([
             'hasFile' => $request->hasFile('profile_img'),
             'file'    => $request->file('profile_img'),
             'path'    => $path ?? null,
         ]);
- */        
+ */
 
         return redirect('/mypage');
     }
@@ -73,4 +74,6 @@ class UserController extends Controller
 
         return redirect ('/mypage')->with('message', 'プロフィールを更新しました');
     }
- */}
+ */
+
+}

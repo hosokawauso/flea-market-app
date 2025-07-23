@@ -49,7 +49,7 @@
           @foreach ($categories as $category)
             <label class="sell-form__category-button">
               <input class="sell-form__input-category" type="checkbox" name="category[]" value="{{ $category->id }}" hidden {{ in_array($category->id, old('category', [])) ? 'checked' : '' }}>
-              <span class="category-content">{{ $category->content }}</span>      
+              <span class="category-content">{{ $category->content }}</span>
             </label>
           @endforeach
         </div>
