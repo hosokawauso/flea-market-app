@@ -16,11 +16,11 @@
         <div class="item-card">
           <div class="item-img">
             <a href="/item/{{ $item->id }}" class="item-card">
-              <img src="{{ asset('storage/' . rawurlencode($item->item_img)) }}" alt="{{ $item->item_name }}">
+              <img src="{{ asset('storage/' . rawurlencode($item->item_img)) }}" alt="{{ $item->item_name }}" class="{{ $item->is_sold ? 'sold-image' : '' }}">
+            </a>
             @if ($item->is_sold)
             <span class="sold-label">Sold</span>
             @endif
-            </a>
           </div>
           <p>{{ $item->item_name }}</p>
         </div>
@@ -33,9 +33,10 @@
           <a href="/item/{{ $item->id }}" class="item-card">
             <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
           @if ($item->is_sold)
+        </a>
           <span class="sold-label">Sold</span>
           @endif
-          </a>
+          
         </div>
         <p>{{ $item->item_name }}</p>
       </div>

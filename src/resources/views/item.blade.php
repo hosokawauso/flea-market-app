@@ -70,7 +70,7 @@
           @if (!$item->purchase)
             <a href="{{ route('item.purchase', ['item' => $item->id]) }}" class="purchase-procedure">購入手続きへ</a>
           @else
-            <p class="sold-out" >Sold</p>
+            <a class="purchase-procedure sold-out" >Sold</a>
           @endif
 
           </div>

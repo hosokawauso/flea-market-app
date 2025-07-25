@@ -4,6 +4,17 @@
   padding: 0 16px;
 }
 
+.purchase-address__title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.purchase-address-form__group {
+  margin-top: 40px;
+}
+
 .purchase-address-form__label {
   display: block;
   margin-bottom: 6px;
@@ -14,7 +25,7 @@
 .purchase-address-form__input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 6px;
   font-size: 20px;
   box-sizing: border-box;
@@ -31,7 +42,7 @@
 /* ボタン */
 .purchase-address-form__button {
   text-align: center;
-  margin-top: 32px;
+  margin-top: 90px;
 }
 
 .purchase-address-form__button-submit {
@@ -45,3 +56,4 @@
   font-weight: bold;
   cursor: pointer;
 }
+

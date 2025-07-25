@@ -18,12 +18,19 @@
             <div class="payment-method-area">
                 <p class="payment-method-area__title">支払い方法</p>
                 <select wire:model = "paymentMethod"
-                        class="payment-select" name="payment-select" id="payment-select">
+                        class="payment-select" name="payment-select" wire:focus="$set('focus', true)" wire:blur="$set('focus', false)" id="payment-select">
                     <option value="" disabled  selected>選択してください</option>
                         @foreach($payments as $payment)
                         <option value="{{ $payment->method }}">{{ $payment->method }}</option>
                         @endforeach
                 </select>
+                <p class="payment-method__error-message">
+                    @error('paymentMethod')
+                    @if (!$focus)
+                        {{ $message }}
+                    @endif
+                    @enderror
+                </p>
             </div>
 
 
@@ -45,6 +52,16 @@
                 <div class="address">
                 {{ $purchase['address'] }}{{ $purchase['building'] }}
                 </div>
+                <p class="purchase-address__error-message">
+                    @error('purchase.postal_code')
+                    {{ $message }}
+                    @enderror
+                </p>
+                <p class="purchase-address__error-message">
+                    @error('purchase.address')
+                    {{ $message }}
+                    @enderror
+                </p>
             </div>
             @endif
         </div>

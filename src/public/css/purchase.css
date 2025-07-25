@@ -176,3 +176,11 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+.payment-method__error-message,
+.purchase-address__error-message {
+  color: red;
+  font-size: 15px;
+  margin-left: 50px;
+  height: 16px;
+}

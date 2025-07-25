@@ -21,6 +21,8 @@ class ExhibitedItemTest extends TestCase
      */
     public function test_user_sell_items_with_required_information()
     {
+        Storage::fake('public');
+
         $user = User::factory()->create();
         $categories = Category::factory()->count(3)->create();
 
@@ -29,25 +31,22 @@ class ExhibitedItemTest extends TestCase
             'brand_name' => 'ブランドA',
             'price' => 1000,
             'description' => 'これは商品の説明です',
-            'item_img' =>  'item.imgs/default.png',
+            'item_img' => UploadedFile::fake()->image('test.png'),
             'condition' => 3,
             'is_sold' => false,
             'category' => $categories->pluck('id')->toArray(),
         ]);
 
-        $response->dd();
-
-        /* $response->assertSessionHasNoErrors(); */
+       /*  $response->assertSessionHasNoErrors(); */
 
         /* $response = $this->actingAs($user)->post('/sell', $formData); */
 
         $this->assertDatabaseHas('items', [
             'user_id' =>$user->id,
-            'item_name' => 'テスト太郎',
+            'item_name' => 'テスト商品',
             'brand_name' => 'ブランドA',
             'price' => 1000,
             'description' => 'これは商品の説明です',
-            'item_img' => 'item.imgs/default.png',
             'condition' => 3,
             'is_sold' => false,
         ]);

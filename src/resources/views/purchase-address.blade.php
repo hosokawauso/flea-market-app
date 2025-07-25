@@ -20,6 +20,7 @@
           @enderror
         </p>
       </div>
+
       <div class="purchase-address-form__group">
         <label class="purchase-address-form__label" for="address">住所</label>
         <input class="purchase-address-form__input" type="text" name="address" id="address" value="{{ old('address') }}">
@@ -29,6 +30,7 @@
           @enderror
         </p>
       </div>
+      
       <div class="purchase-address-form__group">
         <label class="purchase-address-form__label" for="building">建物名</label>
         <input class="purchase-address-form__input" type="text" name="building" id="building" value="{{ old('building') }}">

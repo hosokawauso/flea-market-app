@@ -146,7 +146,7 @@ h3 {
 }
 
 .comments-form__textarea {
-  width: 100%;
+  width: 500px;
   min-height: 246px;
   border-radius: 5px;
   border: 2px solid #ccc;
@@ -154,9 +154,29 @@ h3 {
   resize: both;
 }
 
-.purchase-box__button,
+.purchase-procedure {
+  display: inline-block;
+  width: 500px;
+  height: 54px;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 25px;
+  background-color: #f66;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.purchase-procedure.sold-out {
+  background-color: #fff;
+  color: #f66;
+  border: 1px solid #f66;
+  font-weight: bold;
+  pointer-events: none;
+}
+
 .comments-form__button-submit {
-  width: 100%;
+  width: 500px;
   height: 54px;
   padding: 6px;
   background-color: #f66;
@@ -168,33 +188,9 @@ h3 {
   cursor: pointer;
 }
 
-.purchase-box__button {
-  text-align: center;
-}
-
-.purchase-procedure {
-  text-decoration: none;
-  color: inherit;
-}
-
-.sold-out {
-  width: 100%;
-  height: 56px;
-  padding: 15px;
-  background-color: #fff;
-  color: #f66;
-  font-weight: bold;
-  border: 1px solid #f66;
-  border-radius: 4px;
-  font-size: 25px;
-  cursor: pointer;
-}
-
 .register-form__error-message {
   color: red;
   font-size: 15px;
   margin-top: 4px;
   height: 40px;
 }
-
-

@@ -52,8 +52,8 @@ class MylistPageTest extends TestCase
         $response = $this->actingAs($user)->get('/?page=mylist');
 
         $response->assertSee('Sold');
-        $response->assertSee($soldItem->item_name);
-        $response->assertSee($availableItem->item_name);
+        $response->assertSeeText($soldItem->item_name);
+        $response->assertSeeText($availableItem->item_name);
     }
 
     public function test_logged_in_user_does_not_see_own_items_on_mylist_page()

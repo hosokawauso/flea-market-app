@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Requests\AddressRequest;
+use App\Http\Requests\PurchaseRequest;
 
 class PurchaseController extends Controller
 {
@@ -28,7 +28,7 @@ class PurchaseController extends Controller
         return view('purchase-address', compact('item'));
     }
     
-     public function updateAddress(Request $request, Item $item)
+     public function updateAddress(PurchaseRequest $request, Item $item)
     {
         /* dd('リクエスト到達', $request->all()); */
 

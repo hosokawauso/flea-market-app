@@ -35,8 +35,10 @@
       @if ($page === 'sell')
         @forelse ($sellingItems as $item)
           <div class="item-card">
+            <a href="/item/{{ $item->id }}" class="item-card">
             <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
           <p> {{ $item->item_name }}</p>
+            </a>
           </div>
         @empty
           <p class="empty-message">出品した商品はありません。</p>
@@ -45,8 +47,10 @@
       @elseif($page === 'buy')
         @forelse($purchasedItems as $item)
           <div class="item-card">
+            <a href="/item/{{ $item->id }}" class="item-card">
               <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
             <p>{{ $item->item_name }}</p>
+            </a>
           </div>
           @empty
             <p class="empty-message">購入した商品はありません。</p>

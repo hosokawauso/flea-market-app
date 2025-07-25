@@ -19,6 +19,8 @@ class PurchasePage extends Component
     /* public $selectedMethod = ''; */
     public $paymentMethod = '';
 
+    public $focus = false;
+
     public $purchase = [
         'postal_code' => '',
         'address' => '',
@@ -81,18 +83,18 @@ class PurchasePage extends Component
     {
         return [
             'paymentMethod.required' => '支払い方法を選択してください',
-            'purchase.postal_code.required' => '郵便番号を入力してください',
+            'purchase.postal_code.required' => '配送先の郵便番号を入力してください',
             'purchase.postal_code.regex' => 'ハイフン(-)を含めた8文字で入力してください',
-            'purchase.address.required' => '住所を入力してください',
+            'purchase.address.required' => '配送先の住所を入力してください',
 
         ];
     }
-    
+
     public function purchase()
     {
         $this->validate();
 
-        
+
         /* $purchase = session('purchase_address') ?? [
             'postal_code' => Auth::user()->postal_code,
             'address' => Auth::user()->address,
