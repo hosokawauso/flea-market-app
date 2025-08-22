@@ -20,9 +20,9 @@ class MylistPageTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $item1 = Item::factory()->create();
-        $item2 = Item::factory()->create();
-        $item3 = Item::factory()->create();
+        $item1 = Item::factory()->create(['item_name' => 'テスト商品1']);
+        $item2 = Item::factory()->create(['item_name' => 'テスト商品2']);
+        $item3 = Item::factory()->create(['item_name' => 'テスト商品3']);
 
         $user->favoriteItems()->attach([$item1->id, $item3->id]);
 
@@ -36,7 +36,7 @@ class MylistPageTest extends TestCase
     public function test_sold_items_show_sold_label()
     {
         $user = User::factory()->create();
-        
+
         $soldItem = Item::factory()->create([
             'item_name' => '購入済み商品',
             'is_sold' => true,

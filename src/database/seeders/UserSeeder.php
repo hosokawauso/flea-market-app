@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
     {
         $user = [
             [
-                'name' => '山田一郎',
+                'name' => '茂木一郎',
                 'email' => '1@test.jp',
                 'password' => Hash::make('hosokawa'),
                 'postal_code' => 123-5678,
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'name' => 'コマさん',
+                'name' => 'ニコ',
                 'email' => '2@test.jp',
                 'password' => Hash::make('hosokawa'),
                 'postal_code' => '',
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'name' => '山田一郎',
+                'name' => 'サブロー・バスター・ホームズ',
                 'email' => '3@test.jp',
                 'password' => Hash::make('hosokawa'),
                 'postal_code' => 123-5678,

@@ -6,14 +6,11 @@
 
 @section('content')
 <div class="product-detail">
+  <div class="product-detail__inner">
 
   <div class="product-image-area">
     <div class="product-image">
-      @if (Str::startsWith($item->item_img, 'http'))
-      <img src="{{ $item->item_img }}" alt="{{ $item->item_name }}">
-      @else
       <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
-      @endif
     </div>
   </div>
 
@@ -62,19 +59,18 @@
 
     </div>
 
-{{-- 購入ボタン：購入確認画面へ遷移 --}}
+
       <div class="purchase-area">
-{{--         <form  class="purchase-box" action="{{ route('item.purchase', ['item' => $item->id]) }}" method="get">
---}}           <div class="purchase-box__button">
-            {{-- <input class="purchase-box__button-submit" type="submit" value="購入手続きへ"> --}}
+          <div class="purchase-box__button">
+            
           @if (!$item->purchase)
-            <a href="{{ route('item.purchase', ['item' => $item->id]) }}" class="purchase-procedure">購入手続きへ</a>
+            <a href="{{ route('purchase.store', ['item' => $item->id]) }}" class="purchase-procedure">購入手続きへ</a>
           @else
             <a class="purchase-procedure sold-out" >Sold</a>
           @endif
 
           </div>
-         {{-- </form> --}}
+
       </div>
 
       <div class="product-description">
@@ -163,7 +159,7 @@
     </div>
 </div>
 </div>
-
+</div>
 
 </div>
 @endsection

@@ -100,11 +100,19 @@ class ItemController extends Controller
     {
         $keyword = $request->input('keyword');
         
-        $items = Item::searchItemName($keyword)->get();
+        $recommendItems = Item::searchItemName($keyword)->get();
+
+        $user = Auth::user();
+        $favoriteItems = $user
+            ? $user->favorites()->whereHas('item', function($query) use ($keyword) {
+                $query->searchItemName($keyword);
+            })->with('item')->get()
+            : collect();
 
         return view('index', [
-            'recommendItems' => $items,
-            'favoriteItems' => collect(),
+            'recommendItems' => $recommendItems,
+            'favoriteItems' => $favoriteItems,
+            'keyword' => $keyword,
             'page' => 'recommend',
         ]);
     }

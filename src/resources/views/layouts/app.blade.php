@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
   <link rel="stylesheet" href="{{ asset('css/common.css') }}">
   @yield('css')
-  @livewireStyles
+  {{-- @livewireStyles --}}
 </head>
 
 <body>
@@ -58,7 +58,7 @@
     </div>
   </div>
   @stack('scripts')
-  @livewireScripts
+  {{-- @livewireScripts --}}
 </body>
 
 </html>

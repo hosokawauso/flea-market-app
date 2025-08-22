@@ -16,8 +16,12 @@ class PaymentSeeder extends Seeder
     public function run()
     {
         $payment = [
-            ['method' => 'コンビニ払い', 'amount' => 0],
-            ['method' => 'カード支払い', 'amount' => 0],
+            ['amount' => 0,
+            'method' => 'konbini',
+            'currency' => 
+        ], ['amount' => 0,
+            'method' => 'card', 
+        ],
         ];
 
         DB::table('payments')->insert($payment);

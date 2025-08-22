@@ -24,19 +24,23 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'profile_img' => [
-                'file',
-                'mimes:jpeg,png',
-                'max:2048',
-                'nullable',
-            ],
+            'profile_img' => ['file', 'mimes:jpeg,png', 'max:2048', 'nullable'],
+            'name' => ['required'],
+            'postal_code' => ['required', 'regex:/^\d{3}-\d{4}$/'],
+            'address' => ['required'],
+            'building' => ['nullable'],
         ];
     }
 
-    public function message()
+    public function messages()
     {
         return [
-            'profile_img.mines' => '拡張子は .jpeg または .png の画像を選択してください'
+            'profile_img.mimes' => '拡張子は .jpeg または .png の画像を選択してください',
+            'name.required' => 'ユーザー名を入力してください',
+            'postal_code.required' => '郵便番号を入力してください',
+            'postal_code.regex' => 'ハイフン(-)を含めた8文字で入力してください',
+            'address.required' => '住所を入力してください',
+
         ];
     }
 }

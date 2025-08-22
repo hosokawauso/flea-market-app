@@ -184,3 +184,7 @@
   margin-left: 50px;
   height: 16px;
 }
+
+.purchase-address__error-message{
+  white-space: pre-wrap;
+}

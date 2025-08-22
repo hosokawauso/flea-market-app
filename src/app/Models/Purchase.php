@@ -9,8 +9,15 @@ class Purchase extends Model
 {
     use HasFactory;
 
-    protected $guarded = [
-        'id'
+    protected $fillable = [
+        'user_id',
+        'item_id',
+        'payment_id',
+        'checkout_session_id',
+        'status',
+        'purchase_postal_code',
+        'purchase_address',
+        'purchase_building',
     ];
 
     public function user()

@@ -1,5 +1,8 @@
 .product-detail {
   width: 100%;
+}
+
+.product-detail__inner{
   display: grid;
   grid-template-columns: 1fr 1fr;
 }

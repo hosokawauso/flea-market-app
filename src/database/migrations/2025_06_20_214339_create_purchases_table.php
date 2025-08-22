@@ -15,12 +15,17 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('item_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('payment_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('item_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('payment_id')->nullable()->constrained('payments')->cascadeOnUpdate()->nullOnDelete();
+
+            $table->string('checkout_session_id', 255)->nullable()->unique();
+            $table->string('status', 32)->default('pending');
+
             $table->string('purchase_postal_code');
-            $table->string('purchase_address');
-            $table->string('purchase_building')->nullable();
+            $table->text('purchase_address');
+            $table->string('purchase_building', 255)->nullable();
+
             $table->timestamps();
         });
     }

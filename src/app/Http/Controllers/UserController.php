@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ProfileRequest;
 
 
@@ -13,15 +12,13 @@ class UserController extends Controller
 
 
 
-    public function edit()
+    public function show()
     {
         return view('profile', ['user'=>Auth::user()]);
     }
 
-    public function update(AddressRequest $request)
+    public function update(ProfileRequest $request)
     {
-       $this->validate($request, (new ProfileRequest())->rules());
-
         $user = Auth::user();
 
         $user->fill($request->only(['name', 'postal_code', 'address', 'building']));

@@ -128,12 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const preview = document.getElementById('preview');
   const button  = document.querySelector('.img-upload-button');
 
-  input.addEventListener('change', e => {
-    const file = e.target.files[0];
+  input.addEventListener('change', (event) => {
+    const file = event.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = ev => {
-      preview.src = ev.target.result;
+    reader.onload = (readEvent) => {
+      preview.src = event.target.result;
       preview.hidden = false;
       button.style.display = 'none';
     };
