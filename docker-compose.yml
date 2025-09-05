@@ -44,3 +44,9 @@ services:
     ports:
       - "8025:8025"
       - "1025:1025"
+
+  selenium:
+    image: selenium/standalone-chrome:latest
+    shm_size: 2gb
+    ports:
+      - "4444:4444"

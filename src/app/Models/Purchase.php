@@ -12,8 +12,6 @@ class Purchase extends Model
     protected $fillable = [
         'user_id',
         'item_id',
-        'payment_id',
-        'checkout_session_id',
         'status',
         'purchase_postal_code',
         'purchase_address',
@@ -30,13 +28,8 @@ class Purchase extends Model
         return $this->belongsTo(Item::class);
     }
 
-    /* public function purchaseAddress()
+    public function payments()
     {
-        return $this->hasOne(PurchaseAddress::class);
-    } */
-
-    public function payment()
-    {
-        return $this->belongsTo(Payment::class);
+        return $this->hasMany(Payment::class, 'purchase_id', 'id');
     }
 }

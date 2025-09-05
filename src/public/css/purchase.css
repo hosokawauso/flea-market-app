@@ -2,55 +2,89 @@
   width: 100%;
   padding: 40px;
   display: grid;
-  grid-template-rows: 250px 200px 200px;
-  grid-template-columns: 2fr 1fr;
+  gap:var(--gap);
+  padding:var(--gap);
 }
 
-.purchase-info {
-  margin: 0 40px;
-}
+@media (min-width:1024px) {
+  .purchase-screen{
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+  }
 
 .purchase-info__inner {
-  grid-row: 1/2;
-  grid-column: 1/2;
-  display: flex;
-  height: 215px;
-  padding-bottom: 40px;
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: var(--gap);
+  margin: 50px 50px 0 50px;
+  height: auto;
+  min-height: 150px;
   border-bottom: 4px solid #ccc;
 }
 
+@media (min-width:480px) {
+  .purchase-info__inner {
+    grid-template-columns: 120px 1fr;
+  }
+}
+
 .payment-method-area {
-  grid-row: 1/2;
-  grid-column: 2/3;
-  height: 180px;
+  margin-top: var(--gap);
   padding: 20px 30px 30px 30px;
+  margin: 0 50px 0 50px;
   border-bottom: 4px solid #ccc;
 }
 
 .purchase-address-area {
-  grid-row: 1/2;
-  grid-column: 3/4;
-  height: 180px;
+  margin-top: var(--gap-lg);
   padding: 20px 30px 30px 30px;
+  margin: 0 50px 0 50px;
   border-bottom: 4px solid #ccc;
 }
 
-.confirm-surface {
-  grid-row: 1/2;
-  grid-column: 2/3;
+.purchase-address-area__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  gap: 8px;
 }
 
-.product-image img {
+.purchase-address-area__btn {
+  font-size: 20px;
+  text-decoration: none;
+  color: #4169e1
+}
+
+.purchase-address {
+  margin-top: 8px;
+  padding: 12px;
+}
+
+.confirm-surface {
+  position: sticky;
+  top: 12px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: var(--gap);
+  margin: 50px;
+}
+
+
+.item-image img {
   width: 170px;
   height: auto;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 25px;
 }
 
-.product-info {
-  margin-left: 50px;
+.item-info {
+  margin-left: 100px;
 }
 
 
-.product-title {
+.item-title {
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 25px;
@@ -66,26 +100,18 @@
 
 /* 支払い方法 */
 .payment-method-area__title {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-size: 20px;
   font-weight: bold;
 }
 
 .payment-select {
-  width: 30%;
-  height: auto;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-  box-sizing: border-box;
+  width: 50%;
+  padding: 5px;
   margin-left: 50px;
-  background-color: none;
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 20px;
-  cursor: pointer;
-  color: #333;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
 }
 
 .payment-select,
@@ -94,48 +120,20 @@
 }
 
 /* ドロップダウン部分全体 */
-::picker(select) {
+ ::picker(select) {
   border-radius: 10px;
   background: white;
   position: relative;
-  box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px,
-    rgba(15, 15, 15, 0.2) 0px 9px 24px;
-  width: 50%px;
-}
-
-/* option */
-.payment-select option {
-  background: white;
-  position: relative;
-}
-
-/* ホバー・フォーカスされているoption */
-.payment-select option:hover,
-.payment-select option:focus-visible {
-  background-color: rgba(55, 53, 47, 0.06);
-  outline: none;
+  width: auto;
 }
 
 .payment-select option[disabled] {
   display: none;
 }
 
-/* 配送先確認画面 */
-.purchase-address-area__header {
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .purchase-address-area__title {
   font-size: 20px;
   font-weight: bold;
-}
-
-.purchase-address-area__btn {
-  font-size: 18px;
-  text-decoration: none;
 }
 
 .postal-code,
@@ -150,19 +148,56 @@
 }
 
 /*購入確認小画面*/
-.summary__table {
+ .summary__table {
   width: 100%;
   border-collapse: collapse;
   border: solid 1px;
+  table-layout: fixed;
 }
 
-.summary__table th,td {
+.summary__table th,
+.summary__table td {
   padding: 20px;
   border-bottom: solid 1px;
-  height: 100px;
+  height:auto;
   text-align: center;
   font-size: 20px;
 }
+
+
+@media (max-width:768px) {
+  .summary__table th,
+  .summary__table td {
+    font-size: 16px;
+    padding: 10px, 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .summary__table {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+  }
+
+  .summary__table tr {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 4px;
+    padding: 8px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fafafa;
+  }
+
+  .summary__table th,
+  .summary__table td {
+    text-align: left;
+    border-bottom: 0;
+    font-size: 14px;
+    padding: 6px 8px;
+  }
+}
+
 
 .purchase-confirm__button-submit {
   background-color: #ff6666;

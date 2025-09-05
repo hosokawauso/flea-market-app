@@ -24,7 +24,7 @@ class ChangeUserInformationTest extends TestCase
             'address' => '香川県高松市浜ノ町',
             'building' => 'マリンタワー1120',
         ]);
-        
+
         $response = $this->actingAs($user)->get('/mypage/profile');
 
         $response->assertStatus(200);

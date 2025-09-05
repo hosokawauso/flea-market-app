@@ -10,7 +10,7 @@
 
   <div class="sell-form__inner">
     <form class="sell-form__form" action="/sell" method="post" enctype="multipart/form-data">
-      @csrf      
+      @csrf
         <div class="sell-form__img-upload">
           <div class="label-wrapper">
             <label class="sell-form__label" for="item_img">商品画像</label>
@@ -24,11 +24,9 @@
           <div class="img-upload-box">
             <label class="img-upload-button" for="item_img">画像を選択する</label>
 
-            <img class="img-preview"  id="preview" src="{{ asset('images/placeholder.png') }}" alt="商品画像" hidden>
+            <img class="img-preview"  id="preview" src="{{ asset('img/placeholder.png') }}" alt="商品画像" hidden>
 
-            <input class="sell-form__input" type="file" name="item_img" id="item_img" accept="image/*" style="display: none;" >
-
-
+            <input hidden class="sell-form__input is-hidden" type="file" name="item_img" id="item_img" accept="image/*" >
           </div>
         </div>
 
@@ -127,15 +125,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const input   = document.getElementById('item_img');
   const preview = document.getElementById('preview');
   const button  = document.querySelector('.img-upload-button');
+  const placeholder = "{{ asset('img/placeholder.png') }}";
 
-  input.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+  input.addEventListener('change', (changeEvent) => {
+    const file = changeEvent.target.files && changeEvent.target.files[0];
+
+    if (!file) {
+      preview.src = placeholder;
+      preview.hidden = false;
+      if (button) button.style.display = '';
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = (readEvent) => {
-      preview.src = event.target.result;
+      const result = readEvent.target && readEvent.target.result;
+      preview.src = (typeof result === 'string' && result.length) ? result : placeholder;
       preview.hidden = false;
-      button.style.display = 'none';
+      if (button) button.style.display = 'none';
     };
     reader.readAsDataURL(file);
   });

@@ -10,4 +10,7 @@ return [
     'card'    => ['card'],
     'konbini' => ['konbini'],
   ],
+
+  'fake' => env('PAYMENTS_FAKE', false),
+
 ];

@@ -1,50 +1,73 @@
-.product-detail {
+.item-detail {
   width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--gap);
+  color: var(--ink);
 }
 
-.product-detail__inner{
+.item-detail__inner{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  gap: var(--gap-lg);
 }
 
-.product-image {
-  grid-column: 1/2;
+@media(min-width:768px){
+  .item-detail__inner{
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.item-img {
   display: flex;
   justify-content: center;
 }
 
-.product-image img {
-  width: 500px;
-  height: auto;
-  padding: 50px;
+.item-img img {
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 1 / 1;
+  padding: 20px;
 }
 
-.product-description-area {
-  grid-column: 2/3;
-  padding: 50px;
+.item-description-area {
+  padding: 0;
+}
+@media(min-width:768px){
+  .item-description-area{
+    padding: 0 var(--gap);
+  }
 }
 
-.product-actions {
+.item-actions {
   display: flex;
 }
 
-.product-title {
-  font-size: 40px;
+.item-title {
+  font-size: clamp(22px, 3.2vw, 32px);
+  line-height: 1.25;
   font-weight: bold;
 }
 
 .brand_name {
-  font-size: 20px;
+  font-size: clamp(14px, 2.2vw, 18px);
+  color:var(--muted);
 }
 
-.price-area,
-.product-actions {
-  margin-top: 15px;
+.price-area{
+  margin-top: 10px;
 }
 
 .price {
-  font-size: 40px;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: bold;
 }
+
+.item-actions {
+  margin-top: 15px;
+}
+
 
 .favorite-counter,
 .comments-counter {
@@ -62,12 +85,12 @@ h3 {
   font-weight: bold;
 }
 
-.product-info {
+.item-info {
   margin-top: 20px;
 }
 
 .category-info,
-.product-condition {
+.item-condition {
   display: flex;
   align-items: flex-start;
   /* テキストの上部で揃える */
@@ -88,9 +111,9 @@ h3 {
 }
 
 .category-list li {
-  display: inline;
-  margin-right: 8px;
-  border-radius: 20px;
+  display: inline-block;
+  margin: 0 8px 8px 0;
+  border-radius: 999px;
   padding: 6px 16px;
   font-size: 13px;
   color: black;
@@ -105,8 +128,8 @@ h3 {
 
 #preview,
 .profile-img__placeholder {
-  width: 100px;
-  height: 100px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background-color: #ccc;
   color: black;
@@ -116,11 +139,18 @@ h3 {
   justify-content: center;
   font-weight: bold;
 }
+@media(min-width: 768px){
+  #preview,
+  .profile-img__placeholder {
+    width: 100px;
+    height: 100px;
+    }
+}
 
 .comment-user {
   width: 50%;
   margin-left: 30px;
-  font-size: 20px;
+  font-size: clamp(14px, 2.4vw, 18px);
 }
 
 .condition {
@@ -140,6 +170,7 @@ h3 {
 .comments-form {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .comments-form__label {
@@ -149,21 +180,25 @@ h3 {
 }
 
 .comments-form__textarea {
-  width: 500px;
-  min-height: 246px;
+  width: 100%;
+  max-width: 800px;
+  min-height: 160px;
   border-radius: 5px;
   border: 2px solid #ccc;
   box-sizing: border-box;
-  resize: both;
+  resize: vertical;
 }
 
 .purchase-procedure {
   display: inline-block;
-  width: 500px;
-  height: 54px;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  min-height: 50px;
   padding: 10px 20px;
   text-align: center;
-  font-size: 25px;
+  font-size: clamp(16px, 2.8vw, 25px);
+  font-weight: bold;
   background-color: #f66;
   color: #fff;
   border-radius: 4px;
@@ -179,15 +214,17 @@ h3 {
 }
 
 .comments-form__button-submit {
-  width: 500px;
-  height: 54px;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  min-height: 50px;
   padding: 6px;
   background-color: #f66;
   color: #fff;
   font-weight: bold;
   border: none;
   border-radius: 4px;
-  font-size: 25px;
+  font-size: clamp(16px, 2.8vw, 25px);
   cursor: pointer;
 }
 
@@ -195,5 +232,5 @@ h3 {
   color: red;
   font-size: 15px;
   margin-top: 4px;
-  height: 40px;
+  min-height: 20px;
 }

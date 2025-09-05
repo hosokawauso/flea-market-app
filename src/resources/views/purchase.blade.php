@@ -8,11 +8,11 @@
 <div class="purchase-screen">
   <div class="purchase-info">
     <div class="purchase-info__inner">
-      <div class="product-image">
+      <div class="item-image">
         <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
       </div>
-      <div class="product-info">
-        <div class="product-title">
+      <div class="item-info">
+        <div class="item-title">
           {{ $item->item_name }}
         </div>
         <div class="price-area">

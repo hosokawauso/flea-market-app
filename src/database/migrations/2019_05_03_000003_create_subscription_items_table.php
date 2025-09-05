@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('subscription_id');
             $table->string('stripe_id')->unique();
-            $table->string('stripe_product');
+            $table->string('stripe_item');
             $table->string('stripe_price');
             $table->integer('quantity')->nullable();
             $table->timestamps();

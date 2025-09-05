@@ -22,19 +22,19 @@ class Payment extends Model
  */
 
     protected $fillable = [
-    'user_id',
-    'item_id',
+    'purchase_id',
     'amount',
     'currency',
     'method',
     'status',
     'checkout_session_id',
     'payment_intent_id',
+    'expires_at',
     ];
 
     public function purchase()
     {
-        return $this->hasOne(Purchase::class, 'payment_id');
+        return $this->belongsTo(Purchase::class, 'payment_id', 'id');
     }
 
 }

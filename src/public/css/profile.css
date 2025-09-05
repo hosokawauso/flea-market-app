@@ -12,14 +12,6 @@
   text-align: center;
 }
 
-/* フォーム内側 */
-/* .profile__inner {
-  background-color: #fff;
-  padding: 24px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
- */
 /* プロフィール画像エリア */
 .profile-img {
   display: flex;

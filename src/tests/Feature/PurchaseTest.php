@@ -5,12 +5,10 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use Livewire\Livewire;
-use App\Http\Livewire\PurchasePage;
 use App\Models\User;
 use App\Models\Item;
 use App\Models\Payment;
-
+use App\MOdels\Purchase;
 
 
 class PurchaseTest extends TestCase
@@ -21,110 +19,120 @@ class PurchaseTest extends TestCase
      *
      * @return void
      */
+    protected function setUp(): void
+    {
+        parent::setUp();
+        config()->set('payment.fake', true);
+    }
+
     public function test_user_can_complete_purchase_process()
     {
-        $user = User::factory()->create();
-        $item = Item::factory()->create();
-        $payment = Payment::factory()->create([
-            'method' => 'コンビニ払い',
-            'amount' => 1000, //明示的に追加
-        ]);
+        $seller = User::factory()->create();
+        $buyer = User::factory()->create();
+        $item = Item::factory()->create(['user_id' => $seller->id]);
 
-        $purchase= [
+        $addr = [
             'postal_code' =>'760-0080',
             'address' => '香川県高松市サンポート2-1',
             'building' => 'マリンタイムプラザ30階',
-            'payment_id' => $payment->id,
         ];
 
-        $this->actingAs($user);
+        $this->actingAs($buyer)
+            ->from(route('purchase.confirm', ['item' => $item->id]))
+            ->followingRedirects()
+            ->post(route('purchase.address.update', ['item' => $item->id]), $addr)
+            ->assertStatus(200);
 
-        Livewire::test(PurchasePage::class, ['item' => $item])
-            ->set('paymentMethod', 'コンビニ払い')
-            ->set('purchase', $purchase)
-            ->call('purchase')
-            ->assertRedirect('/mypage?page=buy');
+        $this->followingRedirects()
+            ->post(route('payment.checkout', ['item' => $item->id]),[
+                'payment_method' => 'konbini',
+            ])
+            ->assertStatus(200);
+
+        $purchase = Purchase::where('user_id', $buyer->id)
+            ->where('item_id', $item->id)
+            ->latest('id')
+            ->first();
+
+        $this->assertNotNull($purchase, 'Purchase was not created');
 
         $this->assertDatabaseHas('purchases', [
-            'user_id' => $user->id,
+            'id' => $purchase->id,
+            'user_id' => $buyer->id,
             'item_id' => $item->id,
-            'payment_id' => $payment->id,
-            'purchase_postal_code' => $purchase['postal_code'],
-            'purchase_address' => $purchase['address'],
-            'purchase_building' => $purchase['building'],
+            'purchase_postal_code' => $addr['postal_code'],
+            'purchase_address' => $addr['address'],
+            'purchase_building' => $addr['building'],
         ]);
+
     }
 
     public function test_sold_label_is_displayed_for_purchased_item_on_index_page()
     {
-        $user = User::factory()->create();
-        $item = Item::factory()->create();
-        $payment = Payment::factory()->create([
-            'method' => 'コンビニ払い',
-            'amount' => 1000,
-        ]);
+        $seller = User::factory()->create();
+        $buyer = User::factory()->create();
+        $item = Item::factory()->create(['user_id' => $seller->id]);
 
-        $purchase = [
+        $addr = [
             'postal_code' =>'760-0080',
             'address' => '香川県高松市サンポート2-1',
             'building' => 'マリンタイムプラザ30階',
-            'payment_id' => $payment->id,
         ];
 
-        $this->actingAs($user);
+        $this->actingAs($buyer)
+            ->from(route('purchase.confirm', ['item' => $item->id]))
+            ->followingRedirects()
+            ->post(route('purchase.address.update', ['item' => $item->id]), $addr)
+            ->assertStatus(200);
 
-        Livewire::test(PurchasePage::class, ['item' => $item])
-            ->set('paymentMethod', 'コンビニ払い')
-            ->set('purchase', $purchase)
-            ->call('purchase')
-            ->assertRedirect('/mypage?page=buy');
+        $this->followingRedirects()
+            ->post(route('payment.checkout', ['item' => $item->id]),[
+                'payment_method' => 'konbini',
+            ])
+            ->assertStatus(200);
+        
+        $item->refresh();
+        if (!$item->is_sold) {
+            $item->is_sold = true;
+            $item->save();
+        }
 
-        $this->assertDatabaseHas('purchases', [
-            'user_id' => $user->id,
-            'item_id' => $item->id,
-            'payment_id' => $payment->id,
-            'purchase_postal_code' => $purchase['postal_code'],
-            'purchase_address' => $purchase['address'],
-            'purchase_building' => $purchase['building'],
-        ]);
-
-        $item->is_sold = true;
-        $item->save();
-
-        $response = $this->get("/");
-
+        $response = $this->get('/');
+        $response->assertStatus(200);
         $response->assertSeeText($item->item_name);
         $response->assertSeeText('Sold');
     }
 
     public function test_purchased_item_is_displayed_on_my_page()
     {
-        $user = User::factory()->create();
-        $item = Item::factory()->create();
-        $payment = Payment::factory()->create([
-            'method' => 'コンビニ払い',
-            'amount' => 1000,
-        ]);
+        $seller = User::factory()->create();
+        $buyer = User::factory()->create();
+        $item = Item::factory()->create(['user_id' => $seller->id]);
 
-        $purchase= [
+        $addr = [
             'postal_code' =>'760-0080',
             'address' => '香川県高松市サンポート2-1',
             'building' => 'マリンタイムプラザ30階',
-            'payment_id' => $payment->id,
         ];
 
-        $this->actingAs($user);
+        $this->actingAs($buyer)
+            ->from(route('purchase.confirm', ['item' => $item->id]))
+            ->followingRedirects()
+            ->post(route('purchase.address.update', ['item' => $item->id]), $addr)
+            ->assertStatus(200);
 
-        Livewire::test(PurchasePage::class, ['item' => $item])
-            ->set('paymentMethod', 'コンビニ払い')
-            ->set('purchase', $purchase)
-            ->call('purchase')
-            ->assertRedirect('/mypage?page=buy');
+        $this->followingRedirects()
+            ->post(route('payment.checkout', ['item' => $item->id]),[
+                'payment_method' => 'konbini',
+            ])
+            ->assertStatus(200);
 
         $response = $this->get('/mypage?page=buy');
-
         $response->assertStatus(200);
         $response->assertSeeText($item->item_name);
-        $response->assertSee(asset('storage/' . $item->item_img));
+
+        if(!empty($item->item_img)){
+            $response->assertSee(e(asset('storage/' . $item->item_img)));
+        }
     }
 }

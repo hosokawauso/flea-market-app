@@ -24,27 +24,25 @@ Route::get('/search', [ItemController::class, 'search']);
 Route::post('/sell', [ItemController::class, 'sell'])->middleware('auth');
 
 
+//いいね
 Route::post('/item/{item}/favorites', [FavoriteController::class, 'toggle'])->middleware('auth')->name('item.favorite');
-
+//コメント
 Route::post('/item/{item}/comments', [CommentController::class, 'store'])->middleware('auth')->name('item.comment.store');
 
 
+
 Route::get('/purchase/{item}', [PurchaseController::class, 'confirm'])->middleware('auth')->name('purchase.confirm');
+Route::post('/purchase/{item}', [PurchaseController::class, 'store'])->name('purchase.store');
+
 Route::get('/purchase/address/{item}', [PurchaseController::class, 'edit'])->middleware('auth')->name('purchase.address.edit');
 Route::post('/purchase/address/{item}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
-Route::post('/purchase/{item}', [PurchaseController::class, 'store'])->name('purchase.store');
 
 
 Route::post('/payment/checkout/{item}', [PaymentController::class, 'checkout'])->name('payment.checkout')->middleware('auth');
 Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success')->middleware('auth');
 Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel')->middleware('auth');
+
 Route::post('/webhook/stripe', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
-
-
-/* Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook']); */
-
-
-
 
 
 /*メール認証用ルート*/

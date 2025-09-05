@@ -1,10 +1,14 @@
 # COACHTECH フリマアプリ
 
+模擬案件で作成したフリマアプリです。
+ユーザー登録、ログイン、商品の出品・購入、検索、お気に入り商品のマイリストへの登録（いいね機能）、コメント機能、Stripe によるカード支払い、コンビニ払いに対応した決済を実装しています。
+
 ## 環境構築
 
 **Docker ビルド**
 
 1. `git clone git@github.com:hosokawauso/flea-market-app.git`
+   cd flea-market-app
 2. DockerDesktop アプリを立ち上げる
 3. `docker-compose up -d --build`
 
@@ -52,6 +56,24 @@ php artisan migrate
 php artisan db:seed
 ```
 
+8. ストレージのシンボリックリンク
+
+```bash
+php artisan storage:link
+```
+
+## テストケース
+
+1. Feature/Unit テスト
+   docker compose exec app php artisan test
+
+2. Dusk テスト
+
+```bash
+php artisan dusk:install
+php artisan dusk
+```
+
 ## 使用技術(実行環境)
 
 ・PHP 7.4.9
@@ -61,10 +83,12 @@ php artisan db:seed
 ・Blade
 ・Docker/Doker Compose
 ・Git/GitHub
+・Stripe アカウント(テストキー)
+・MailHog(開発時のメール確認)
 
 ## ER 図
 
-![alt](erd.png)
+![alt text](image.png)
 
 ## URL
 

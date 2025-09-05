@@ -64,13 +64,8 @@
   display: inline-block;
 }
 
-.profile-edit-button:hover {
-  background-color: #0056b3;
-}
-
 .mypage__tabs {
   border-bottom: 4px solid #555;
-  width: 100%;
 }
 
 a {
@@ -81,10 +76,6 @@ a {
   font-size: 25px;
   padding-bottom: 4px;
   transition: all 0.3s ease;
-}
-
-a:hover {
-  color: #ff6666;
 }
 
 a.active {
@@ -103,12 +94,13 @@ a.active {
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  padding: 40px 20px;
+  gap: var(--gap);
+  padding: 20px 0 40px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
 }
 
 .item-card {
-  padding: 8px;
+  padding: 20px;
   position: relative;
 }
 
@@ -118,9 +110,11 @@ a.active {
 }
 
 .item-card img {
+  display: block;
   width: 100%;
   height: auto;
   object-fit: cover;
+  aspect-ratio: 1 / 1;
 }
 
 

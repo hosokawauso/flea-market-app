@@ -15,12 +15,13 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId('item_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            /* $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('item_id')->constrained()->cascadeOnUpdate()->restrictOnDelete(); */
+            $table->foreignId('purchase_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
 
             $table->integer('amount');
             $table->string('method', 20);
-            $table->string('currency', 10)->default('jyp');
+            $table->string('currency', 10)->default('jpy');
             $table->string('status', 32)->default('pending');
 
             $table->string('checkout_session_id', 255)->unique()->nullable();
@@ -29,7 +30,7 @@ class CreatePaymentsTable extends Migration
             $table->timestamp('expires_at')->nullable();
 
             $table->timestamps();
-            $table->index(['user_id', 'item_id']);
+            /* $table->index(['user_id', 'item_id']); */
             $table->index(['status']);
             $table->index(['method']);
         });

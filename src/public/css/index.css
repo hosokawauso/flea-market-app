@@ -22,10 +22,9 @@ a {
 
 .empty-message {
   grid-column: 1 / -1;
-  /* ← グリッド4列全体にまたがる */
   text-align: center;
   padding: 40px 0;
-  font-size: 20px;
+  font-size: clamp(14px, 2.6vw, 18px);
   color: #555;
 }
 
@@ -33,12 +32,25 @@ a {
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  padding: 40px 20px;
+  gap: var(--gap);
+  padding: 20px 0 40px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+@media (min-width:760px){
+  .top_items{
+    gap:var(--gap-lg);
+  }
+}
+
+@media(min-width:1400px){
+  .top_items{
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
 }
 
 .item-card {
-  padding: 8px;
+  padding: 20px;
   position: relative; 
 }
 
@@ -57,10 +69,11 @@ a {
   width: 100%;
   height: auto;
   object-fit: cover;
+  aspect-ratio: 1 / 1;
 }
 
 .sold-image {
-  opacity: 0.4;
+  opacity: .4;
 }
 
 .sold-label {
@@ -77,16 +90,9 @@ a {
   z-index: 1;
 }
 
-/* .sold-label {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background-color: red;
-  color: white;
-  padding: 4px 8px;
-  font-size: 12px;
-  font-weight: bold;
-  border-radius: 4px;
-}
- */
 
+@media (min-width:1400px) {
+  .top__inner{
+    padding:0 20px;
+  }
+}

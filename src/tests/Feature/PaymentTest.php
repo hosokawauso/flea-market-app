@@ -5,8 +5,6 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use Livewire\Livewire;
-use App\Http\Livewire\PurchasePage;
 use App\Models\User;
 use App\Models\Item;
 use App\Models\Payment;
@@ -22,18 +20,35 @@ class PaymentTest extends TestCase
      */
     public function test_selected_payment_method_reflected_in_confirmation_area()
     {
-        $user = User::factory()->create();
-        $item = Item::factory()->create();
-        $payment = Payment::factory()->create([
-            'method' => 'カード支払い',
-            'amount' => 1000,
-        ]);
+        $seller = User::factory()->create();
+        $buyer  = User::factory()->create();
+        $item = Item::factory()->create(['user_id' => $seller->id]);
 
-        $this->actingAs($user);
+        $this->withSession([
+            'purchase_address' => [
+                'postal_code' => '123-456',
+                'address' => '香川県高松市浜ノ町',
+                'building' => 'マリンタワー1120',
+                ]
+            ]);
 
-        Livewire::test(\App\Http\Livewire\PurchasePage::class, ['item' => $item])
-        ->set('paymentMethod', 'カード支払い')
-        ->assertSet('paymentMethod', 'カード支払い')
-        ->assertSee('カード支払い');
+        $this->actingAs($buyer)
+            ->withSession([
+                'purchase_address' => [
+                'postal_code' => '123-456',
+                'address' => '香川県高松市浜ノ町',
+                'building' => 'マリンタワー1120',
+                ],
+                '_old_input' => [
+                    'payment_method' => 'konbini'
+                ],
+            ])
+
+            ->get(route('purchase.confirm', ['item' => $item->id]))
+            ->assertStatus(200)
+            ->assertSee(
+                config('payments.methods.konbini', 'コンビニ払い')
+            );
+
     }
 }
