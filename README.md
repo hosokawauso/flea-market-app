@@ -8,19 +8,9 @@
 **Docker ビルド**
 
 1. `git clone git@github.com:hosokawauso/flea-market-app.git`
-   cd flea-market-app
+   `cd flea-market-app`
 2. DockerDesktop アプリを立ち上げる
 3. `docker-compose up -d --build`
-
-> _Mac の M1・M2 チップの PC の場合、`no matching manifest for linux/arm64/v8 in the manifest list entries`のメッセージが表示されビルドができないことがあります。
-> エラーが発生する場合は、docker-compose.yml ファイルの「mysql」内に「platform」の項目を追加で記載してください_
-
-```bash
-mysql:
-    platform: linux/x86_64(この文追加)
-    image: mysql:8.0.26
-    environment:
-```
 
 **Laravel 環境構築**
 
@@ -36,6 +26,11 @@ DB_PORT=3306
 DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
+
+STRIPE_KEY=pk_test_xxx 
+STRIPE_SECRET=sk_test_xxx 
+STRIPE_WEBHOOK_SECRET=whsec_xxx 
+
 ```
 
 5. アプリケーションキーの作成
@@ -65,7 +60,10 @@ php artisan storage:link
 ## テストケース
 
 1. Feature/Unit テスト
-   docker compose exec app php artisan test
+
+```bash
+docker compose exec app php artisan test
+```
 
 2. Dusk テスト
 
@@ -88,7 +86,7 @@ php artisan dusk
 
 ## ER 図
 
-![alt text](image.png)
+![alt text](image-1.png)
 
 ## URL
 
