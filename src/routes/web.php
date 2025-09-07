@@ -42,7 +42,7 @@ Route::post('/payment/checkout/{item}', [PaymentController::class, 'checkout'])-
 Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success')->middleware('auth');
 Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel')->middleware('auth');
 
-Route::post('/webhook/stripe', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
 
 /*メール認証用ルート*/

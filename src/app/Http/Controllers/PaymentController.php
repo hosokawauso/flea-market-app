@@ -103,7 +103,6 @@ class PaymentController extends Controller
         $purchase = Purchase::create([
             'user_id' => $user->id,
             'item_id' => $item->id,
-            /* 'payment_id' => $payment->id, */
             'status' => 'pending',
             'purchase_postal_code' => (string) ($purchaseAddress['postal_code'] ?? ''),
             'purchase_address'     => (string) ($purchaseAddress['address'] ?? ''),
@@ -112,9 +111,6 @@ class PaymentController extends Controller
         ]);
 
         $payment = $purchase->payments()->create([
-            /* 'user_id' => $user->id,
-            'item_id' => $item->id, */
-            /* 'purchase_id' => $purchase->id, */
             'amount' => (int)$item->price,
             'currency' => 'jpy',
             'method' => $paymentMethod,
@@ -136,7 +132,7 @@ class PaymentController extends Controller
                 'price_data' => [
                     'currency' =>'jpy',
                     'unit_amount' => (int)$item->price,
-                    'item_data' => ['name' => $item->item_name],
+                    'product_data' => ['name' => $item->item_name],
                 ],
                 'quantity' => 1,
             ]],
