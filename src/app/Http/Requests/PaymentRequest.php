@@ -38,7 +38,6 @@ class PaymentRequest extends FormRequest
     {
         return [
             'payment_method.required' => '支払い方法を選択してください',
-            /* 'payment_method.in'       => '支払い方法の値が不正です', */
         ];
     }
 

@@ -6,7 +6,7 @@
   border-bottom: 4px solid #555;
 }
 
-a {
+.top__tabs a {
   text-decoration: none;
   color: #555;
   margin: 20px;
@@ -31,21 +31,22 @@ a {
 .top__items {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: var(--gap);
   padding: 20px 0 40px;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-@media (min-width:760px){
-  .top_items{
-    gap:var(--gap-lg);
+@media (min-width: 768px) and (max-width: 850px) {
+.top__items {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap-md, 14px);
   }
 }
 
-@media(min-width:1400px){
-  .top_items{
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+@media (min-width: 1400px) and (max-width: 1540px) {
+.top__items {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gap-lg, 20px);
   }
 }
 
@@ -56,9 +57,12 @@ a {
 
 .item-card p {
   margin: -20px;
+  padding-left: 20px;
   font-size: 16px;
-  text-align: center;
+  text-align: left;
 }
+
+
 
 .item-img {
   position: relative;

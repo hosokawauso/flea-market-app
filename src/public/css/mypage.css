@@ -8,19 +8,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 24px;
+  gap: 30px;
 }
 
 .profile-img__info {
   display: flex;
   align-items: center;
-  gap: 16px;
+  margin-left: 0 0 0 30px;
+  gap: 50px;
 }
 
 #preview {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   background-color: #ccc;
@@ -48,11 +48,10 @@
 .user-name {
   font-size: 32px;
   font-weight: bold;
-  margin-left: 40px;
 }
 
 .profile-edit-button {
-  margin-left: 300px;
+  margin-left: 500px;
   background: none;
   border: 1px solid #ff6666;
   color: #ff6666;
@@ -93,10 +92,9 @@ a.active {
 .mypage__items {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: var(--gap);
   padding: 20px 0 40px;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
 }
 
 .item-card {
@@ -118,7 +116,7 @@ a.active {
 }
 
 
-@media screen and (max-width: 850px) {
+@media (min-width: 768px) and (max-width: 850px) {
   .mypage__heading {
     flex-direction: column;
     align-items: center;
@@ -143,5 +141,17 @@ a.active {
     font-size: 16px;
     padding: 10px 20px;
     text-align: center;
+  }
+
+  .mypage__items {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--gap-md, 14px);
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1540px) {
+  .mypage__items {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--gap-lg, 20px);
   }
 }

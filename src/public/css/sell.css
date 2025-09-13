@@ -77,8 +77,214 @@ h3 {
 font-weight: bold;
 display: block;
 margin-bottom: 15px;
-list-style: 1;
+line-height: 1;
 white-space: nowrap;
+}
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.sell-form__category-button {
+  cursor: pointer;
+}
+
+.category-content {
+  display: inline-block;
+  border: 2px solid #f55;
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: #f55;
+  background-color: #fff;
+}
+
+
+.sell-form__input-category:checked+.category-content {
+  background-color: #f55;
+  color: #fff;
+}
+
+.sell-form__input,
+.sell-form__condition-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 25px;
+}
+
+.sell-form__condition-select,
+::picker(select) {
+  appearance: base-select;
+}
+
+/* ドロップダウンのスタイル */
+::picker(select) {
+  border-radius: 10px;
+  background: white;
+  position: relative;
+  width: 50%;
+}
+
+.sell-form__condition-select{
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* optionのスタイル */
+.sell-form__condition-select option {
+  background: white;
+  position: relative;
+}
+
+  /* フォーカスされているoption要素のスタイル */
+  .sell-form__condition-select option:hover,
+  .sell-form__condition-select option:focus-visible {
+    background-color: rgba(55, 53, 47, 0.06);
+    outline: none;
+  }
+
+.sell-form__condition-select option[disabled] {
+  display: none;
+}
+
+.sell-form__description {
+  margin-top: 16px;
+}
+
+.sell-form__price {
+  position: relative;
+}
+
+.price-mark {
+  padding-left: 28px;
+}
+
+.sell-form__price span {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-20%);
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+
+/* エラーメッセージ */
+.sell-form__error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+  height: 16px;
+  line-height: 1;
+  margin: 0;
+}
+
+.sell-form__button-submit {
+  background-color: #ff6666;
+  color: #fff;
+  width: 100%;
+  padding: 10px 24px;
+  margin-top: 50px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sell-form {
+  width: 50%;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.sell-form__heading {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.sell-form__inner {
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  font-size: 25px;
+  border-bottom: 4px solid #555;
+  margin-bottom: 24px;
+}
+
+.sell-form__img-upload {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.label-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.img-upload-box {
+  width: 100%;
+  padding: 8px 12px;
+  height: 250px;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+}
+
+.img-upload-button {
+  display: inline-block;
+  padding: 10px 20px;
+  color: red;
+  border: 1px solid red;
+  background-color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.img-upload-button[hidden] {
+  display: none !important;
+}
+
+.custom-upload-button:hover {
+  background-color: #ffecec;
+}
+
+.img-preview {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid #ccc;
+}
+
+
+.sell-form__label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 15px;
+  list-style: 1;
+  white-space: nowrap;
 }
 
 .category-list {
@@ -132,7 +338,7 @@ white-space: nowrap;
   width: 50%px;
 }
 
-.sell-form__condition-select{
+.sell-form__condition-select {
   background-color: none;
   background-repeat: no-repeat;
   background-position: right 12px center;
@@ -147,12 +353,12 @@ white-space: nowrap;
   position: relative;
 }
 
-  /* ホバー・フォーカスされているoption要素のスタイル */
-  .sell-form__condition-select option:hover,
-  .sell-form__condition-select option:focus-visible {
-    background-color: rgba(55, 53, 47, 0.06);
-    outline: none;
-  }
+/* ホバー・フォーカスされているoption要素のスタイル */
+.sell-form__condition-select option:hover,
+.sell-form__condition-select option:focus-visible {
+  background-color: rgba(55, 53, 47, 0.06);
+  outline: none;
+}
 
 .sell-form__condition-select option[disabled] {
   display: none;
@@ -186,10 +392,9 @@ white-space: nowrap;
 .sell-form__error-message {
   color: red;
   font-size: 14px;
-  margin-top: 4px;
   height: 16px;
   line-height: 1;
-  margin: 0;
+  margin: 0 0 15px;
 }
 
 .sell-form__button-submit {

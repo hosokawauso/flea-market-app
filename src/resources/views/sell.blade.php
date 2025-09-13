@@ -7,32 +7,26 @@
 @section('content')
 <div class="sell-form">
   <h2 class="sell-form__heading">商品の出品</h2>
-
   <div class="sell-form__inner">
     <form class="sell-form__form" action="/sell" method="post" enctype="multipart/form-data">
       @csrf
-        <div class="sell-form__img-upload">
-          <div class="label-wrapper">
-            <label class="sell-form__label" for="item_img">商品画像</label>
-            <p class="sell-form__error-message">
-              @error('item_img')
-              {{ $message }}
-              @enderror
-            </p>
-          </div>
-
-          <div class="img-upload-box">
-            <label class="img-upload-button" for="item_img">画像を選択する</label>
-
-            <img class="img-preview"  id="preview" src="{{ asset('img/placeholder.png') }}" alt="商品画像" hidden>
-
-            <input hidden class="sell-form__input is-hidden" type="file" name="item_img" id="item_img" accept="image/*" >
-          </div>
+      <div class="sell-form__img-upload">
+        <div class="label-wrapper">
+          <label class="sell-form__label" for="item_img">商品画像</label>
+          <p class="sell-form__error-message">
+            @error('item_img')
+            {{ $message }}
+            @enderror
+          </p>
         </div>
-
+        <div class="img-upload-box">
+          <label class="img-upload-button" for="item_img">画像を選択する</label>
+          <img class="img-preview"  id="preview" src="{{ asset('img/placeholder.png') }}" alt="商品画像" hidden>
+          <input hidden class="sell-form__input is-hidden" type="file" name="item_img" id="item_img" accept="image/*"  value="{{ old('item_img') }}">
+        </div>
+      </div>
 
       <h3>商品の詳細</h3>
-
       <div class="sell-form__category">
         <div class="label-wrapper">
         <label class="sell-form__label">カテゴリー</label>
@@ -42,7 +36,6 @@
           @enderror
         </p>
         </div>
-
         <div class="category-list">
           @foreach ($categories as $category)
             <label class="sell-form__category-button">
@@ -52,7 +45,6 @@
           @endforeach
         </div>
       </div>
-
       <div class="sell-form__condition">
         <div class="label-wrapper">
           <label class="sell-form__label">商品の状態</label>
@@ -87,7 +79,6 @@
         <label class="sell-form__label" for="brand_name">ブランド名</label>
         <input class="sell-form__input" type="text" name="brand_name" id="brand_name" value="{{ old('brand_name') }}">
       </div>
-
       <div class="sell-form__description">
         <div class="label-wrapper">
           <label class="sell-form__label" for="description">商品の説明</label>
@@ -99,7 +90,6 @@
         </div>
         <textarea class="sell-form__input" name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
       </div>
-
       <div class="sell-form__price">
         <div class="label-wrapper">
           <label class="sell-form__label" for="price">販売価格</label>
@@ -112,14 +102,13 @@
         <span class="input-prefix">¥</span>
         <input class="sell-form__input price-mark" type="number" name="price" id="price" value="{{ old('price') }}">
       </div>
-
       <button class="sell-form__button-submit" type="submit">出品する</button>
     </form>
   </div>
 </div>
 @endsection
 
-@push('scripts')  {{-- layouts/app.blade.php に @stack('scripts') が必要 --}}
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const input   = document.getElementById('item_img');

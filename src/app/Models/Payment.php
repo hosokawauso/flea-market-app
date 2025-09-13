@@ -9,18 +9,6 @@ class Payment extends Model
 {
     use HasFactory;
 
-/*     const METHOD_CONVENIENCE = 1;
-    const METHOD_CARD = 2;
-
-    public static function getMethodLabels()
-    {
-        return [
-            self::METHOD_CONVENIENCE => 'コンビニ払い',
-            self::METHOD_CARD => 'カード支払い',
-        ];
-    }
- */
-
     protected $fillable = [
     'purchase_id',
     'amount',

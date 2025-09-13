@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -62,8 +62,7 @@ class LoginTest extends TestCase
     {
         $email = $this->faker->unique()->safeEmail;
         $password = 'password123';
-        
-        
+
         $user = User::factory()->create([
             'email' => $email,
             'password' => Hash::make($password),

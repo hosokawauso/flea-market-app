@@ -17,9 +17,7 @@ class CreatePurchasesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId('item_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
-            /* $table->foreignId('payment_id')->nullable()->constrained('payments')->cascadeOnUpdate()->nullOnDelete(); */
 
-            /* $table->string('checkout_session_id', 255)->nullable()->unique(); */
             $table->string('status', 32)->default('pending');
 
             $table->string('purchase_postal_code');

@@ -11,14 +11,6 @@
     <form class="profile-form__form" action="/mypage/profile" method="post" enctype="multipart/form-data">
       @csrf
       <div class="profile-img">
-{{--         <label for="profile_img">
-        <img
-          id="preview"
-          src="{{ !empty($user->profile_img) ? asset('storage/' .$user->profile_img) : asset('img/default.png') }}"
-          alt="プロフィール画像"
-          class="{{ empty($user->profile_img) ? 'profile-img__placeholder' : '' }}">
-        </label>
---}}
         @if (!empty($user->profile_img))
           <label for="profile_img">
             <img id="preview" src="{{ asset('storage/' . $user->profile_img) }}" alt="プロフィール画像">
@@ -64,7 +56,7 @@
       </div>
       <div class="profile-form__button">
           <button class="profile-form__button-submit" type="submit">更新する</button>
-      </div> 
+      </div>
     </form>
   </div>
 </div>

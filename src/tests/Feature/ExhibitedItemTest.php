@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
-use App\Models\Item;
-use App\Models\User;
-use App\Models\Category;
 
 
 class ExhibitedItemTest extends TestCase
@@ -37,9 +37,6 @@ class ExhibitedItemTest extends TestCase
             'category' => $categories->pluck('id')->toArray(),
         ]);
 
-       /*  $response->assertSessionHasNoErrors(); */
-
-        /* $response = $this->actingAs($user)->post('/sell', $formData); */
 
         $this->assertDatabaseHas('items', [
             'user_id' =>$user->id,

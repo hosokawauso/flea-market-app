@@ -30,9 +30,9 @@ Route::post('/item/{item}/favorites', [FavoriteController::class, 'toggle'])->mi
 Route::post('/item/{item}/comments', [CommentController::class, 'store'])->middleware('auth')->name('item.comment.store');
 
 
-
 Route::get('/purchase/{item}', [PurchaseController::class, 'confirm'])->middleware('auth')->name('purchase.confirm');
 Route::post('/purchase/{item}', [PurchaseController::class, 'store'])->name('purchase.store');
+
 
 Route::get('/purchase/address/{item}', [PurchaseController::class, 'edit'])->middleware('auth')->name('purchase.address.edit');
 Route::post('/purchase/address/{item}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');

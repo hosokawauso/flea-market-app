@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-//use Laravel\Cashier\Http\Controllers\WebhookController as CashierController;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use Stripe\Webhook as StripeWebhook;
-use Stripe\StripeClient;
-use App\Models\Purchase;
-use App\Models\Payment;
 use App\Models\Item;
+use App\Models\Payment;
+use App\Models\Purchase;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
+use Stripe\StripeClient;
+use Stripe\Webhook as StripeWebhook;
 
 class StripeWebhookController extends Controller
 {
 
     public function handle(Request $request)
     {
-        // Cashierの推奨どおり：config/services.php のネストを参照
+    // Cashierの推奨どおり：config/services.php のネストを参照
     $signingSecret = config('services.stripe.webhook.secret');
     $payload   = $request->getContent();
     $signature = $request->header('Stripe-Signature');
@@ -35,7 +34,50 @@ class StripeWebhookController extends Controller
     }
 
     $type = $event->type ?? '';
-    \Log::info('stripe webhook received', ['type' => $type, 'event_id' => $event->id ?? null]);
+
+    // 非即時決済の確定：コンビニ等
+    if ($type === 'payment_intent.succeeded'/*  || $type === 'checkout.session.async_payment_succeeded' */) {
+        $pi = $event->data->object;
+        $piId = $pi->id;
+
+        $payment = Payment::where('payment_intent_id', $piId)->first();
+
+        if (!$payment) {
+            $paymentIdFromMeta = (int)($pi->metadata->payment_id ?? 0);
+            if ($paymentIdFromMeta) {
+                $payment = Payment::find($paymentIdFromMeta);
+            }
+        }
+
+        if(!$payment) {
+            Log::warning('pi.succeeded: payment not found', ['pi => $piId']);
+            return response('OK', 200);
+        }
+
+        $purchase = Purchase::find($payment->purchase_id);
+        if (!$purchase) {
+            \Log::warning('pi.succeeded: purchase not found', ['payment_id' => $payment->id]);
+            return response('OK', 200);
+        }
+
+        DB::transaction(function () use ($payment, $purchase) {
+            $item = Item::lockForUpdate()->find($purchase->item_id);
+            if (!$item || $item->is_sold) return;
+
+            $payment->update(['status' => 'succeeded']);
+            $purchase->update(['status' => 'succeeded']);
+            $item->update(['is_sold' => true, 'sold_at' => now()]);
+        });
+
+        Log::info('sold updated via pi.succeeded', [
+            'payment_id' => $payment->id,
+            'purchase_id' => $purchase->id,
+        ]);
+
+        return response('OK', 200);
+    }
+
+
 
     if ($type !== 'checkout.session.completed') {
         return response('OK', 200);
@@ -46,16 +88,16 @@ class StripeWebhookController extends Controller
     $sessionId = $session->id ?? null;
     $paid      = ($session->payment_status ?? null) === 'paid';
 
-    \Log::info('branch: checkout.completed', [
+    Log::info('branch: checkout.completed', [
         'session_id'     => $sessionId,
         'payment_status' => $session->payment_status ?? null,
     ]);
 
-    // ===== 1) まず checkout_session_id から Payment/Purchase を特定 =====
+    // 1) まず checkout_session_id から Payment/Purchase を特定
     $payment  = Payment::where('checkout_session_id', $sessionId)->first();
     $purchase = $payment ? Purchase::find($payment->purchase_id) : null;
 
-    // ===== 2) だめなら metadata / client_reference_id から復旧 =====
+    // 2) だめなら metadata / client_reference_id から復旧
     $itemIdFromMeta     = $session->metadata->item_id ?? null;
     $purchaseIdFromMeta = $session->metadata->purchase_id ?? null;
     $clientRefId        = $session->client_reference_id ?? null;
@@ -70,35 +112,14 @@ class StripeWebhookController extends Controller
         }
     }
 
-    // ===== 3) さらにだめなら PaymentIntent.metadata で復旧（checkoutで設定していれば使える） =====
-    if (!$payment || !$purchase) {
-        $piId = $session->payment_intent ?? null;
-        if ($piId) {
-            try {
-                $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
-                $pi = $stripe->paymentIntents->retrieve($piId, []);
-                $paymentIdFromPi  = (int)($pi->metadata->payment_id ?? 0);
-                $purchaseIdFromPi = (int)($pi->metadata->purchase_id ?? 0);
-
-                if ($paymentIdFromPi) {
-                    $payment  = Payment::find($paymentIdFromPi) ?: $payment;
-                }
-                if ($purchaseIdFromPi) {
-                    $purchase = Purchase::find($purchaseIdFromPi) ?: $purchase;
-                }
-                \Log::info('recovered by pi metadata', [
-                    'pi' => $piId,
-                    'payment_id' => $paymentIdFromPi,
-                    'purchase_id' => $purchaseIdFromPi,
-                ]);
-            } catch (\Throwable $e) {
-                \Log::warning('pi retrieve failed', ['err' => $e->getMessage(), 'pi' => $piId]);
-            }
-        }
+    // 3) さらに PaymentIntent.metadata で復旧（checkoutで設定していれば使える
+    $piId = $session->payment_intent ?? null;
+    if ($piId && $payment && !$payment->payment_intent_id) {
+        $payment->update(['payment_intent_id' => $piId]);
     }
 
     if (!$payment || !$purchase) {
-        \Log::warning('no local records for session', [
+        Log::warning('no local records for session', [
             'session_id' => $sessionId,
             'meta_item' => $itemIdFromMeta,
             'meta_purchase' => $purchaseIdFromMeta,
@@ -107,7 +128,7 @@ class StripeWebhookController extends Controller
         return response('OK', 200);
     }
 
-    // すでに確定済みなら何もしない（冪等）
+    // 冪等
     if ($purchase->status === 'succeeded') {
         return response('OK', 200);
     }

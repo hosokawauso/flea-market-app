@@ -15,7 +15,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $category = [
+        $categories = [
             ['content' => 'ファッション'],
             ['content' => '家電'],
             ['content' => 'インテリア'],
@@ -31,7 +31,8 @@ class CategorySeeder extends Seeder
             ['content' => 'おもちゃ'],
             ['content' => 'ベビー・キッズ'],
         ];
-
-        DB::table('categories')->insert($category);
+        foreach ($categories as $category) {
+            Category::firstOrCreate(['category' => $category]);
+        }
     }
 }

@@ -16,7 +16,7 @@
         <div class="item-card">
           <div class="item-img">
             <a href="/item/{{ $item->id }}" class="item-card">
-              <img src="{{ asset('storage/' . rawurlencode($item->item_img)) }}" alt="{{ $item->item_name }}" class="{{ $item->is_sold ? 'sold-image' : '' }}">
+            <img src="{{ asset('storage/' . rawurlencode($item->item_img)) }}" alt="{{ $item->item_name }}" class="{{ $item->is_sold ? 'sold-image' : '' }}">
             </a>
             @if ($item->is_sold)
             <span class="sold-label">Sold</span>
@@ -25,28 +25,25 @@
           <p>{{ $item->item_name }}</p>
         </div>
       @endforeach
-
     @elseif($page === 'mylist')
     @forelse ($favoriteItems as $item)
       <div class="item-card">
         <div class="item-img">
           <a href="/item/{{ $item->id }}" class="item-card">
-            <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}" class="{{ $item->is_sold ? 'sold-image' : '' }}">
+          <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}" class="{{ $item->is_sold ? 'sold-image' : '' }}">
           </a>
           @if ($item->is_sold)
-          <span class="sold-label">Sold</span>
+            <span class="sold-label">Sold</span>
           @endif
-
         </div>
         <p>{{ $item->item_name }}</p>
       </div>
     @empty
       <div class="empty-message">
-        マイリストに登録した商品はありません
+      マイリストに登録した商品はありません
       </div>
     @endforelse
     @endif
   </div>
 </div>
-
 @endsection

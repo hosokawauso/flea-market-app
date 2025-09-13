@@ -10,13 +10,14 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'item_img',
-        'condition',
         'item_name',
         'brand_name',
-        'description',
         'price',
+        'description',
+        'item_img',
+        'condition',
         'is_sold',
+        'sold_at',
     ];
 
     public function scopeSearchItemName($query, $keyword)

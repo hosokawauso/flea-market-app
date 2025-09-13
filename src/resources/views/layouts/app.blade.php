@@ -27,7 +27,7 @@
         @csrf
         <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
       </form>
-      
+
       <nav class="header__nav">
         <form action="/logout" method="post">
           @csrf
@@ -42,23 +42,21 @@
       <form class="search-form" action="/search" method="get">
         <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
       </form>
-      
+
       <nav class="header__nav">
         <a class="header__link-login" href="/login">ログイン</a>
         <a class="header__link-mypage" href="/mypage">マイページ</a>
         <a class="header__link-sell" href="/sell">出品</a>
       </nav>
-     @endguest
+      @endguest
     </header>
 
     <div class="content">
       @yield('content')
 
-      
     </div>
   </div>
   @stack('scripts')
-  {{-- @livewireScripts --}}
 </body>
 
 </html>

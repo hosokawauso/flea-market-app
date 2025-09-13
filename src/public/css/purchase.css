@@ -98,7 +98,6 @@
   font-size: 30px;
 }
 
-/* 支払い方法 */
 .payment-method-area__title {
   margin-bottom: 20px;
   font-size: 20px;
@@ -119,8 +118,7 @@
   appearance: base-select;
 }
 
-/* ドロップダウン部分全体 */
- ::picker(select) {
+::picker(select) {
   border-radius: 10px;
   background: white;
   position: relative;
@@ -148,7 +146,7 @@
 }
 
 /*購入確認小画面*/
- .summary__table {
+.summary__table {
   width: 100%;
   border-collapse: collapse;
   border: solid 1px;

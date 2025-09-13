@@ -42,7 +42,6 @@ class CustomVerifyEmail extends BaseVerifyEmail
     public function toMail($notifiable)
     {
         $verificationUrl = $this->verificationUrl($notifiable);
-        
         return (new MailMessage)
                     ->subject('メール認証を完了してください')
                     ->line('下記のリンクをクリックしてメールアドレスを認証してください。')

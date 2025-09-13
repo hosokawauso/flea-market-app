@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Item;
-use App\Models\User;
+use App\Http\Requests\ExhibitionRequest;
 use App\Models\Category;
 use App\Models\Comment;
-use App\Http\Requests\ExhibitionRequest;
+use App\Models\Item;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
@@ -33,16 +33,16 @@ class ItemController extends Controller
         if($page === 'mylist') {
             if(Auth::check()) {
                 $favoriteItems = Auth::user()
-                        ->favorites()
-                        ->with('item')
-                        ->get()
-                        ->pluck('item')
-                        ->filter();
+                    ->favorites()
+                    ->with('item')
+                    ->get()
+                    ->pluck('item')
+                    ->filter();
             }
         }
 
         return view('index', compact('page', 'recommendItems', 'favoriteItems'));
-        
+
     }
 
     public function show(Item $item)
@@ -82,24 +82,10 @@ class ItemController extends Controller
         return redirect('/mypage?page=sell');
     }
 
-
-/*     public function store(ProfileRequest $request)
-    {
-        $item = new Item;
-
-        $img_path = $request->file('thumbnail')->store('public/item_imgs/');
-
-        $item->thumbnail = basename($img_path);
-
-        $item->save();
-
-        return redirect('/mypage');
-    }
- */
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');
-        
+
         $recommendItems = Item::searchItemName($keyword)->get();
 
         $user = Auth::user();

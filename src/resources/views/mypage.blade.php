@@ -12,17 +12,15 @@
       <label for="profile_img">
       <img id="preview" src="{{ asset('storage/' . $user->profile_img) }}" alt="プロフィール画像">
       </label>
-      @else
-        <label for="profile_img">
-        <div class="profile-img__placeholder">未設定</div>
-        </label>
-      @endif
-
-        <div class="user-name">
-          {{ $user->name }}
-        </div>
-
-        <a class="profile-edit-button" href="/mypage/profile" >プロフィールを編集</a>
+    @else
+      <label for="profile_img">
+      <div class="profile-img__placeholder">未設定</div>
+      </label>
+    @endif
+      <div class="user-name">
+      {{ $user->name }}
+      </div>
+      <a class="profile-edit-button" href="/mypage/profile" >プロフィールを編集</a>
     </div>
   </div>
   <div class="mypage__inner">
@@ -37,18 +35,17 @@
           <div class="item-card">
             <a href="/item/{{ $item->id }}" class="item-card">
             <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
-          <p> {{ $item->item_name }}</p>
+            <p> {{ $item->item_name }}</p>
             </a>
           </div>
         @empty
           <p class="empty-message">出品した商品はありません。</p>
         @endforelse
-
       @elseif($page === 'buy')
         @forelse($purchasedItems as $item)
           <div class="item-card">
             <a href="/item/{{ $item->id }}" class="item-card">
-              <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
+            <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
             <p>{{ $item->item_name }}</p>
             </a>
           </div>

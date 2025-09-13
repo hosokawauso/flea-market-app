@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ProfileRequest;
 
 
 class UserController extends Controller
@@ -31,14 +31,6 @@ class UserController extends Controller
         $user->is_profile_set = true;
         $user->save();
 
-
-/*         dd([
-            'hasFile' => $request->hasFile('profile_img'),
-            'file'    => $request->file('profile_img'),
-            'path'    => $path ?? null,
-        ]);
- */
-
         return redirect('/mypage');
     }
 
@@ -52,25 +44,4 @@ class UserController extends Controller
 
         return view('mypage', compact('user', 'page', 'sellingItems', 'purchasedItems'));
     }
-
-    /* public function store(RegisterRequest $request)
-    {
-
-    } */
-
-/*     public function update(ProfileRequest $request)
-    {
-        $user = Auth::user();
-
-        $user->update([
-            'postal_code' =>$request->postal_code,
-            'address' => $request->address,
-            'building' => $request->building,
-            'is_profile_set' => true,
-        ]);
-
-        return redirect ('/mypage')->with('message', 'プロフィールを更新しました');
-    }
- */
-
 }

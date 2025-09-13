@@ -12,7 +12,7 @@
   gap: var(--gap-lg);
 }
 
-@media(min-width:768px){
+@media(min-width:768px) {
   .item-detail__inner{
     grid-template-columns: 1fr 1fr;
     align-items: start;
@@ -34,7 +34,7 @@
 .item-description-area {
   padding: 0;
 }
-@media(min-width:768px){
+@media(min-width:768px) {
   .item-description-area{
     padding: 0 var(--gap);
   }
@@ -93,13 +93,11 @@ h3 {
 .item-condition {
   display: flex;
   align-items: flex-start;
-  /* テキストの上部で揃える */
   margin-bottom: 12px;
 }
 
 .info-label {
   width: 120px;
-  /* ラベル幅を固定 */
   font-weight: bold;
 }
 
@@ -139,7 +137,7 @@ h3 {
   justify-content: center;
   font-weight: bold;
 }
-@media(min-width: 768px){
+@media(min-width: 768px) {
   #preview,
   .profile-img__placeholder {
     width: 100px;

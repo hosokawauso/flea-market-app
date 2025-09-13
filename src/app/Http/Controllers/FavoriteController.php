@@ -10,10 +10,6 @@ class FavoriteController extends Controller
 {
     public function toggle(Item $item)
     {
-/*         if(auth()->check()) {
-            return redirect('/login');
-        }
- */
         $user = Auth::user();
 
         if($user->favoriteItems()->where('item_id', $item->id)->exists()) {

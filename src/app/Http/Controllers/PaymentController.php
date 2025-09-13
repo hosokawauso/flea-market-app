@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CheckoutRequest;
 use App\Models\Item;
 use App\Models\Payment;
 use App\Models\Purchase;
-use Illuminate\Http\Request;
 use App\Http\Requests\PurchaseRequest;
-use App\Http\Requests\CheckoutRequest;
-use Stripe\Stripe;
-use Stripe\PaymentIntent;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Stripe\PaymentIntent;
 use Stripe\Checkout\Session as StripeCheckoutSession;
+use Stripe\Stripe;
 use Stripe\Stripe as StripeSDK;
 
 class PaymentController extends Controller

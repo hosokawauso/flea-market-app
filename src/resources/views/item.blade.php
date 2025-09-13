@@ -14,10 +14,10 @@
     </div>
     <div class="item-description-area">
       <div class="item-title">
-        {{ $item->item_name }}
+      {{ $item->item_name }}
       </div>
       <div class="brand_name">
-        {{ $item->brand_name }}
+      {{ $item->brand_name }}
       </div>
       <div class="price-area">
         <span>¥</span>
