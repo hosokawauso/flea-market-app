@@ -1,5 +1,5 @@
 .sell-form {
-  width: 50%;
+  width: 55%;
   margin: 40px auto;
   padding: 0 16px;
 }
@@ -124,35 +124,6 @@ white-space: nowrap;
   appearance: base-select;
 }
 
-/* ドロップダウンのスタイル */
-::picker(select) {
-  border-radius: 10px;
-  background: white;
-  position: relative;
-  width: 50%;
-}
-
-.sell-form__condition-select{
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 20px;
-  cursor: pointer;
-  color: #333;
-}
-
-/* optionのスタイル */
-.sell-form__condition-select option {
-  background: white;
-  position: relative;
-}
-
-  /* フォーカスされているoption要素のスタイル */
-  .sell-form__condition-select option:hover,
-  .sell-form__condition-select option:focus-visible {
-    background-color: rgba(55, 53, 47, 0.06);
-    outline: none;
-  }
-
 .sell-form__condition-select option[disabled] {
   display: none;
 }
@@ -180,8 +151,6 @@ white-space: nowrap;
   pointer-events: none;
 }
 
-
-/* エラーメッセージ */
 .sell-form__error-message {
   color: red;
   font-size: 14px;
@@ -278,7 +247,6 @@ h3 {
   border: 1px solid #ccc;
 }
 
-
 .sell-form__label {
   font-weight: bold;
   display: block;
@@ -307,7 +275,6 @@ h3 {
   color: #f55;
   background-color: #fff;
 }
-
 
 .sell-form__input-category:checked+.category-content {
   background-color: #f55;
@@ -387,8 +354,6 @@ h3 {
   pointer-events: none;
 }
 
-
-/* エラーメッセージ */
 .sell-form__error-message {
   color: red;
   font-size: 14px;

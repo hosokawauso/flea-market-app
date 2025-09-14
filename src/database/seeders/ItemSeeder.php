@@ -56,7 +56,7 @@ class ItemSeeder extends Seeder
                 'brand_name' => '',
                 'price' => 4000,
                 'description' => 'クラシックなデザインの革靴',
-                'item_img' => 'item_imgs/Leather+Shoes+item+Photo.jpg',
+                'item_img' => 'item_imgs/Leather+Shoes+Product+Photo.jpg',
                 'condition' => 4,
                 'is_sold' => false,
                 'categories' => [1, 5],

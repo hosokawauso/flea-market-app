@@ -62,7 +62,7 @@
 </div>
 @endsection
 
-@push('script')
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const input   = document.getElementById('profile_img');

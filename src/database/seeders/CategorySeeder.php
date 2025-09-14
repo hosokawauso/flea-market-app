@@ -31,8 +31,8 @@ class CategorySeeder extends Seeder
             ['content' => 'おもちゃ'],
             ['content' => 'ベビー・キッズ'],
         ];
-        foreach ($categories as $category) {
-            Category::firstOrCreate(['category' => $category]);
+        foreach ($categories as $row) {
+            Category::firstOrCreate(['content' => $row['content']]);
         }
     }
 }

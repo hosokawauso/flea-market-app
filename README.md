@@ -27,10 +27,16 @@ DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 
-STRIPE_KEY=pk_test_xxx 
-STRIPE_SECRET=sk_test_xxx 
-STRIPE_WEBHOOK_SECRET=whsec_xxx 
+STRIPE_KEY=pk_test_xxx
+STRIPE_SECRET=sk_test_xxx
+STRIPE_WEBHOOK_SECRET=whsec_xxx
 
+```
+
+STRIPE_WEBHOOK_SECRET はローカル環境下で実行する場合、以下を実行する。
+
+```
+stripe listen --forward-to http://localhost/stripe/webhook
 ```
 
 5. アプリケーションキーの作成
@@ -74,19 +80,19 @@ php artisan dusk
 
 ## 使用技術(実行環境)
 
-・PHP 7.4.9 
-・Laravel 8.83.8 
-・MySQL 8.0.26 
-・Fortify 1.19.1 
-・Blade 
-・Docker/Doker Compose 
-・Git/GitHub 
-・Stripe アカウント(テストキー) 
+・PHP 7.4.9
+・Laravel 8.83.8
+・MySQL 8.0.26
+・Fortify 1.19.1
+・Blade
+・Docker/Doker Compose
+・Git/GitHub
+・Stripe アカウント(テストキー)
 ・MailHog(開発時のメール確認)
 
 ## ER 図
 
-![alt text](image-1.png)
+![alt text](<flea-market-app ER図.png>)
 
 ## URL
 

@@ -6,12 +6,12 @@
   padding:var(--gap);
 }
 
-@media (min-width:1024px) {
+@media (min-width:1400px) {
   .purchase-screen{
     grid-template-columns: 2fr 1fr;
     align-items: start;
   }
-  }
+}
 
 .purchase-info__inner {
   display: grid;
@@ -23,7 +23,7 @@
   border-bottom: 4px solid #ccc;
 }
 
-@media (min-width:480px) {
+@media (min-width:768px) {
   .purchase-info__inner {
     grid-template-columns: 120px 1fr;
   }
@@ -145,7 +145,6 @@
   text-decoration: none;
 }
 
-/*購入確認小画面*/
 .summary__table {
   width: 100%;
   border-collapse: collapse;
@@ -163,39 +162,13 @@
 }
 
 
-@media (max-width:768px) {
+@media (min-width:768px)and(max-width: 840px) {
   .summary__table th,
   .summary__table td {
     font-size: 16px;
     padding: 10px, 8px;
   }
 }
-
-@media (max-width: 640px) {
-  .summary__table {
-    border-collapse: separate;
-    border-spacing: 0 8px;
-  }
-
-  .summary__table tr {
-    display: grid;
-    grid-template-columns: 1fr;
-    row-gap: 4px;
-    padding: 8px;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    background: #fafafa;
-  }
-
-  .summary__table th,
-  .summary__table td {
-    text-align: left;
-    border-bottom: 0;
-    font-size: 14px;
-    padding: 6px 8px;
-  }
-}
-
 
 .purchase-confirm__button-submit {
   background-color: #ff6666;

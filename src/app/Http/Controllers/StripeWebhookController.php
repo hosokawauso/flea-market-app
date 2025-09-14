@@ -28,15 +28,15 @@ class StripeWebhookController extends Controller
 
     try {
         $event = \Stripe\Webhook::constructEvent($payload, $signature, $signingSecret);
-    } catch (\Throwable $e) {
-        \Log::warning('stripe webhook verify failed', ['msg' => $e->getMessage()]);
+    } catch (\Throwable $exception) {
+        \Log::warning('stripe webhook verify failed', ['msg' => $exception->getMessage()]);
         return response('Invalid signature', 400);
     }
 
     $type = $event->type ?? '';
 
     // 非即時決済の確定：コンビニ等
-    if ($type === 'payment_intent.succeeded'/*  || $type === 'checkout.session.async_payment_succeeded' */) {
+    if ($type === 'payment_intent.succeeded') {
         $pi = $event->data->object;
         $piId = $pi->id;
 
