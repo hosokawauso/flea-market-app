@@ -80,14 +80,14 @@ php artisan dusk
 
 ## 使用技術(実行環境)
 
-・PHP 7.4.9
-・Laravel 8.83.8
-・MySQL 8.0.26
-・Fortify 1.19.1
-・Blade
-・Docker/Doker Compose
-・Git/GitHub
-・Stripe アカウント(テストキー)
+・PHP 7.4.9  
+・Laravel 8.83.8  
+・MySQL 8.0.26  
+・Fortify 1.19.1  
+・Blade  
+・Docker/Doker Compose  
+・Git/GitHub  
+・Stripe アカウント(テストキー)  
 ・MailHog(開発時のメール確認)
 
 ## ER 図
