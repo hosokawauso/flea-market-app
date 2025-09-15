@@ -54,7 +54,9 @@ php artisan migrate
 7. シーディングの実行
 
 ```bash
-php artisan db:seed
+php artisan db:seed --class=UserSeeder
+php artisan db:seed --class=CategorySeeder
+php artisan db:seed --class=ItemSeeder
 ```
 
 8. ストレージのシンボリックリンク

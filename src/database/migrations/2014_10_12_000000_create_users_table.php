@@ -24,8 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('building')->nullable();
             $table->boolean('is_profile_set')->default(false);
             $table->rememberToken();
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
             $table->timestamp('email_verified_at')->nullable();
         });
     }
