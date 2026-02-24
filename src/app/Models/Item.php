@@ -55,4 +55,9 @@ class Item extends Model
         return $this->belongsToMany(User::class, 'favorites');
     }
 
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

@@ -49,6 +49,11 @@ class PaymentController extends Controller
                 'status' => 'pending',
             ]);
 
+            Transaction::firstOrCreate(
+                ['purchase_id' => $purchase->id],
+                ['status' => 'open', 'last_message_at' =>now()]
+            );
+
             $purchase->update(['payment_id' => $payment->id]);
 
         });

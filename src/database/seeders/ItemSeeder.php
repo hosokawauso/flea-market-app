@@ -29,7 +29,7 @@ class ItemSeeder extends Seeder
                 'categories' => [1, 4, 12],
             ],
             [
-                'user_id' => 2,
+                'user_id' => 1,
                 'item_name' => 'HDD',
                 'brand_name' => '',
                 'price' => 5000,
@@ -40,7 +40,7 @@ class ItemSeeder extends Seeder
                 'categories' => [2, 8],
             ],
             [
-                'user_id' => 3,
+                'user_id' => 1,
                 'item_name' => '玉ねぎ３束',
                 'brand_name' => '',
                 'price' => 300,
@@ -62,7 +62,7 @@ class ItemSeeder extends Seeder
                 'categories' => [1, 5],
             ],
             [
-                'user_id' => 2,
+                'user_id' => 1,
                 'item_name' => 'ノートPC',
                 'brand_name' => '',
                 'price' => 45000,
@@ -73,7 +73,7 @@ class ItemSeeder extends Seeder
                 'categories' => [2, 8, 9],
             ],
             [
-                'user_id' => 3,
+                'user_id' => 2,
                 'item_name' => 'マイク',
                 'brand_name' => 'SONY',
                 'price' => 8000,
@@ -84,7 +84,7 @@ class ItemSeeder extends Seeder
                 'categories' => [3, 9, 13],
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'item_name' => 'ショルダーバッグ',
                 'brand_name' => 'COACH',
                 'price' => 3500,
@@ -106,7 +106,7 @@ class ItemSeeder extends Seeder
                 'categories' => [1,10],
             ],
             [
-                'user_id' => 3,
+                'user_id' => 2,
                 'item_name' => 'コーヒーミル',
                 'brand_name' => '',
                 'price' => 4000,
@@ -117,7 +117,7 @@ class ItemSeeder extends Seeder
                 'categories' => [3, 10],
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'item_name' => 'メイクセット',
                 'brand_name' => '資生堂',
                 'price' => 2500,

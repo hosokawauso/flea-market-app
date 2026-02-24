@@ -11,11 +11,37 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\TransactionMessageController;
+use App\Http\Controllers\TransactionController;
+
+
 
 Route::get('/mypage/profile', [UserController::class, 'show'])->middleware(['auth', 'verified'])->name('profile.show');
 Route::post('/mypage/profile', [UserController::class, 'update'])->middleware('auth')->name('profile.updata');
+
 Route::get('/mypage', [UserController::class, 'mypage'])->middleware('auth');
 
+
+//Proテストの追加機能
+Route::middleware('auth')->group(function() {
+  Route::get('/transactions/{transaction}', [TransactionController::class, 'show'])->name('transactions.show');
+  Route::post('/transactions/{transaction}/messages', [TransactionController::class, 'store'])->name('transactions.messages.store');
+  Route::post('/transactions/{transaction}/rate/buyer', [TransactionController::class, 'rateByBuyer'])
+    ->name('transactions.rate.buyer');
+
+  Route::post('/transactions/{transaction}/rate/seller', [TransactionController::class, 'rateBySeller'])
+    ->name('transactions.rate.seller');
+
+
+
+    // 編集・削除
+  Route::patch('/transaction-messages/{message}', [TransactionMessageController::class, 'update'])
+  ->name('transactions.messages.update');
+
+  Route::delete('/transaction-messages/{message}', [TransactionMessageController::class, 'destroy'])
+  ->name('transactions.messages.destroy');
+
+});
 
 Route::get('/', [ItemController::class, 'index']);
 Route::get('/sell', [ItemController::class, 'edit'])->middleware('auth');

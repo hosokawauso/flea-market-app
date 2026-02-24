@@ -79,6 +79,34 @@ docker compose exec app php artisan test
 php artisan dusk:install
 php artisan dusk
 ```
+## ER 図
+
+![alt text](<flea-market-app ER図.png>)
+
+## ダミーデータについて
+開発・動作確認用として、以下のダミーデータをSeederで登録しています。  
+
+ユーザー  
+合計 3名  
+商品を出品しているユーザー：2名  
+email:test1@example.com,test2@example.com  
+password:password  
+
+商品を出品していないユーザー：1名  
+email:test3@example.com  
+password:password  
+
+
+商品  
+商品コード C001〜C005  
+→ ユーザー1が出品  
+商品コード C006〜C010  
+→ ユーザー2が出品  
+
+
+## ログイン情報
+
+
 
 ## 使用技術(実行環境)
 
@@ -92,9 +120,6 @@ php artisan dusk
 ・Stripe アカウント(テストキー)  
 ・MailHog(開発時のメール確認)
 
-## ER 図
-
-![alt text](<flea-market-app ER図.png>)
 
 ## URL
 
