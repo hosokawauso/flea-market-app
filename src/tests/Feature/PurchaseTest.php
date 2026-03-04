@@ -132,7 +132,7 @@ class PurchaseTest extends TestCase
         $response->assertSeeText($item->item_name);
 
         if(!empty($item->item_img)){
-            $response->assertSee(e(asset('storage/' . $item->item_img)));
+            $response->assertSee(e(asset( $item->item_img)));
         }
     }
 }

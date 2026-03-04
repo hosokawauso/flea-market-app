@@ -9,7 +9,7 @@
   <div class="purchase-info">
     <div class="purchase-info__inner">
       <div class="item-image">
-        <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
+        <img src="{{ asset($item->item_img) }}" alt="{{ $item->item_name }}">
       </div>
       <div class="item-info">
         <div class="item-title">

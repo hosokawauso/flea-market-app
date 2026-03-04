@@ -1,5 +1,17 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-layout {
+  min-height: 100vh;
+}
+
 .transaction-chat {
   display: grid;
+  width: 100vw;
   grid-template-columns: 260px 1fr;
   /* サイドバー幅 */
   min-height: calc(100vh - 60px);
@@ -148,16 +160,16 @@
   overflow: auto;
 }
 
-.msg {
+/* .msg {
   display: grid;
-  grid-template-columns: 46px 1fr;
+  grid-template-columns: 46px minmax(160px, 1fr);
   gap: 10px;
   margin-bottom: 18px;
   align-items: end;
 }
 
 .msg.is-me {
-  grid-template-columns: 1fr 46px;
+  grid-template-columns: minmax(160px, 1fr) 46px;
 }
 
 .msg__avatar {
@@ -171,7 +183,9 @@
   background: #efefef;
   border-radius: 10px;
   padding: 10px 12px;
-  max-width: 560px;
+  max-width: min(560px, 70%);
+  min-width: 250px;
+  width: fit-content;
 }
 
 .msg.is-me .msg__bubble {
@@ -187,6 +201,8 @@
 .msg__text {
   margin: 0;
   white-space: pre-wrap;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .msg__img {
@@ -210,6 +226,95 @@
   color: #666;
   text-decoration: none;
 }
+ */
+
+.msg {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr);
+  margin-bottom: 18px;
+  align-items: start;
+}
+
+/* 自分は右寄せ */
+.msg.is-me {
+  justify-content: end;
+}
+
+/* content */
+.msg__content {
+  min-width: 0;
+}
+
+.msg.is-me .msg__content {
+  justify-self: end;
+  text-align: right;
+}
+
+/* 上段：名前とアバターを横並び */
+.msg__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 自分側は右寄せ＆並びを反転（名前→右、アバター→一番右） */
+.msg.is-me .msg__head {
+  flex-direction: row-reverse;
+}
+
+/* 名前 */
+.msg__name {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #000;
+}
+
+/* アバター画像（丸に収める） */
+.msg__avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  flex: 0 0 auto;
+}
+
+/* 吹き出し */
+.msg__bubble {
+  background: #D9D9D9;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-top: 6px;
+  max-width: min(560px, 72%);
+  width: fit-content;
+}
+
+.msg.is-me .msg__bubble {
+  margin-left: auto;
+}
+
+/* 本文 */
+.msg__text {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+/* 下の時間/編集/削除 */
+.msg__meta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #666;
+  justify-content: flex-start;
+}
+
+.msg.is-me .msg__meta {
+  justify-content: flex-end;
+}
 
 /* input */
 .chat-input {
@@ -219,6 +324,11 @@
   padding: 14px 18px;
   border-top: 1px solid #ddd;
   align-items: center;
+}
+
+.chat-input__send img {
+  height: 50px;
+  width: 50px;
 }
 
 .chat-input__text {

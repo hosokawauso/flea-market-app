@@ -22,7 +22,6 @@ class TransactionMessageController extends Controller
 
         $message->transaction->update(['last_message_at' => now()]);
 
-        /* dd($request->all(), $message->body); */
 
         return redirect()
             ->route('transactions.show', ['transaction' => $message->transaction_id])

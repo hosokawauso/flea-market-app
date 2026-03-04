@@ -97,7 +97,7 @@ a.active {
   grid-template-columns: repeat(4, minmax(160px, 1fr));
 }
 
-.item-card {
+/* .item-card {
   padding: 20px;
   position: relative;
 }
@@ -115,7 +115,7 @@ a.active {
   aspect-ratio: 1 / 1;
 }
 
-/*評価バッジ*/
+ *//*評価バッジ*/
 
 .rating-stars {
   display: inline-flex;
@@ -135,6 +135,68 @@ a.active {
   color: #FFF048;
 }
 
+/* 見出し横のリンクとバッジを横並びに */
+.transaction-tab {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 赤丸共通 */
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 22px;
+  height: 22px;
+  padding:0 6px;
+  border-radius: 999px;
+
+  background: #FF0000;
+  color: #FFFFFF;
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+}
+
+/* 見出し横（inline） */
+.count-badge--inline {
+  flex: 0 0 auto;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 6px;
+  border-radius: 10px;
+
+  background: #FF0000;
+  color: #FFFFFF;
+
+  font-size: 24px;
+}
+
+/* 画像を包む*/
+.item-thumb {
+  position: relative;
+  display: block;
+}
+
+/* 画像 */
+.item-thumb img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+/* 左上に重ねる */
+.count-badge--corner {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
 
 @media (min-width: 768px) and (max-width: 850px) {
   .mypage__heading {

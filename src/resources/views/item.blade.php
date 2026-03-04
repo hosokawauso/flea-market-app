@@ -9,7 +9,7 @@
   <div class="item-detail__inner">
     <div class="item-img-area">
       <div class="item-img">
-        <img src="{{ asset('storage/' .$item->item_img) }}"  alt="{{ $item->item_name }}">
+        <img src="{{ asset($item->item_img) }}"  alt="{{ $item->item_name }}">
       </div>
     </div>
     <div class="item-description-area">
@@ -98,7 +98,7 @@
       <li class="comment-text">
         <div class="comment-header">
           @if(!empty($comment->user->profile_img))
-            <img id="preview" src="{{ asset('storage/' . $comment->user->profile_img) }}" alt="プロフィール画像">
+            <img id="preview" src="{{ asset( $comment->user->profile_img) }}" alt="プロフィール画像">
           @else
             <div class="profile-img__placeholder">未設定</div>
           @endif

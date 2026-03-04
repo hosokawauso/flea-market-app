@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Transaction;
 use App\Models\TransactionRead;
+use App\Models\TransactionMessage;
 
 
 
@@ -51,6 +52,34 @@ class UserController extends Controller
 
         $transactions = collect();
         $totalUnread = 0;
+
+        $userId = $user->id;
+
+        // 自分が関係する「取引中」の取引IDを全部取得（IDだけ）
+        $transactionIds = Transaction::query()
+            ->whereHas('purchase', function ($q) use ($userId) {
+                $q->where('user_id', $userId)
+                ->orWhereHas('item', fn($q2) => $q2->where('user_id', $userId));
+            })
+            ->whereIn('status', ['open', 'waiting_seller_rating'])
+            ->pluck('id');
+
+        // 既読位置をまとめて取得（transaction_id => last_read_message_id）
+        $readMap = TransactionRead::where('user_id', $userId)
+            ->whereIn('transaction_id', $transactionIds)
+            ->pluck('last_read_message_id', 'transaction_id');
+
+        // 未読総数を合計
+        $totalUnread = 0;
+        foreach ($transactionIds as $tid) {
+            $lastReadId = (int) ($readMap[$tid] ?? 0);
+
+            $totalUnread += TransactionMessage::query()
+                ->where('transaction_id', $tid)
+                ->where('sender_id', '!=', $userId)
+                ->where('id', '>', $lastReadId)
+                ->count();
+        }
 
         // 平均評価
         $avgSeller = Transaction::query()
@@ -109,19 +138,24 @@ class UserController extends Controller
                 ->get();
 
             $transactions->each(function ($t) use ($userId) {
-                $lastReadId = $t->reads()
+                $lastReadId = (int) ($t->reads()
                     ->where('user_id', $userId)
-                    ->value('last_read_message_id');
+                    ->value('last_read_message_id') ?? 0);
 
                 $t->unread_count = $t->messages()
+                    ->where('sender_id', '!=', $userId)
+                    ->where('id', '>', $lastReadId)
+                    ->count();
+
+                /* $t->unread_count = $t->messages()
                     ->when($lastReadId, function ($q) use ($lastReadId) {
                         $q->where('id', '>', $lastReadId);
                     })
                     ->where('sender_id', '!=', $userId)
-                    ->count();
+                    ->count(); */
             });
 
-            $totalUnread = $transactions->sum('unread_count');
+            /* $totalUnread = $transactions->sum('unread_count'); */
         }
 
         return view('mypage', compact(

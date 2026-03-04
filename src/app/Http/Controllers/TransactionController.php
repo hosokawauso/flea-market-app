@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Transaction;
 use App\Models\TransactionRead;
 use App\Http\Requests\TransactionMessageStoreRequest;
+use App\Mail\TransactionCompletedByBuyerMail;
 
 class TransactionController extends Controller
 {
@@ -35,6 +38,7 @@ class TransactionController extends Controller
             ->where('status', 'open')
             ->orderByDesc('last_message_at')
             ->get();
+
 
         $last = $transaction->messages->last();
         $lastMessageId = $last ? $last->id : null;
@@ -106,33 +110,49 @@ class TransactionController extends Controller
             'status' => 'waiting_seller_rating',
         ]);
 
-        // ここで購入者は一覧へ（仕様どおり）
+        $transaction->loadMissing(['purchase.item.user']);
+
+        $seller = null;
+
+        if ($transaction->purchase &&
+            $transaction->purchase->item &&
+            $transaction->purchase->item->user) {
+
+            $seller = $transaction->purchase->item->user;
+        }
+
+        if ($seller && $seller->email) {
+            Mail::to($seller->email)
+                ->send(new TransactionCompletedByBuyerMail($transaction));
+        }
+
+        // ここで購入者は一覧へ
         return redirect('/mypage?page=transaction')->with('success', '評価を送信しました');
     }
 
     public function rateBySeller(Request $request, Transaction $transaction)
-{
-    $userId = auth()->id();
+    {
+        $userId = auth()->id();
 
-    // 出品者本人だけ
-    abort_unless($transaction->purchase->item->user_id === $userId, 403);
+        // 出品者本人だけ
+        abort_unless($transaction->purchase->item->user_id === $userId, 403);
 
-    $request->validate([
-        'rating' => ['required', 'integer', 'min:1', 'max:5'],
-    ]);
+        $request->validate([
+            'rating' => ['required', 'integer', 'min:1', 'max:5'],
+        ]);
 
-    $transaction->update([
-        'seller_rating'   => (int) $request->input('rating'),
-        'seller_rated_at' => now(),
-        // 両者評価が揃ったので完了
-        'status'          => 'completed',
-    ]);
+        $transaction->update([
+            'seller_rating'   => (int) $request->input('rating'),
+            'seller_rated_at' => now(),
+            // 両者評価が揃ったので完了
+            'status'          => 'completed',
+        ]);
 
-    // purchaseも完了扱いにする（購入した商品タブに出す）
-    $transaction->purchase->update([
-        'status' => 'completed',
-    ]);
+        // purchaseも完了扱いにする（購入した商品タブに出す）
+        $transaction->purchase->update([
+            'status' => 'completed',
+        ]);
 
-    return redirect('/mypage?page=transaction')->with('success', '評価を送信しました');
-}
+        return redirect('/mypage?page=transaction')->with('success', '評価を送信しました');
+    }
 }

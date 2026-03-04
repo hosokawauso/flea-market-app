@@ -13,7 +13,7 @@
       <div class="profile-img">
         @if (!empty($user->profile_img))
           <label for="profile_img">
-            <img id="preview" src="{{ asset('storage/' . $user->profile_img) }}" alt="プロフィール画像">
+            <img id="preview" src="{{ asset( $user->profile_img) }}" alt="プロフィール画像">
           </label>
         @else
           <label for="profile_img">

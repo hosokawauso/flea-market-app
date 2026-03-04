@@ -12,16 +12,16 @@
 
       <div class="sidebar__list">
         @foreach($sidebarTransactions as $t)
-          <a class="sidebar__item {{ $transaction->id === $transaction->id ? 'is-active' : '' }}"
+          <a class="sidebar__item {{ $transaction->id === $t->id ? 'is-active' : '' }}"
             href="{{ route('transactions.show', ['transaction' => $t->id])}}">
             <div class="sidebar__thumb">
-              <img src="{{ asset('storage/' . $t->purchase->item->item_img) }}"
+              <img src="{{ asset( $t->purchase->item->item_img) }}"
                   alt="{{ $transaction->purchase->item->item_name }}">
             </div>
 
             <div class="sidebar__meta">
               <p class="sidebar__name">
-                {{ $transaction->purchase->item->item_name }}
+                {{ $t->purchase->item->item_name }}
               </p>
             </div>
           </a>
@@ -48,7 +48,7 @@
       {{--商品情報--}}
       <div class="chat-item">
         <div class="chat-item__img">
-          <img src="{{ asset('storage/' .$transaction->purchase->item->item_img)  }}" alt="{{ $transaction->purchase->item->item_name }}">
+          <img src="{{ asset($transaction->purchase->item->item_img)  }}" alt="{{ $transaction->purchase->item->item_name }}">
         </div>
         <div class="chat-item__info">
           <p class="chat-item__name">{{ $transaction->purchase->item->item_name }}</p>
@@ -58,81 +58,66 @@
       </div>
 
       {{--メッセージ一覧--}}
-    <div class="chat-messages" id="chat-scroll">
-      @forelse($transaction->messages as $m)
-        @php 
-          $isMe = ($m->sender_id === auth()->id());
-        @endphp
+      <div class="chat-messages" id="chat-scroll">
+        @forelse($transaction->messages as $m)
+          @php
+            $isMe = ($m->sender_id === auth()->id());
+          @endphp
 
-        <div class="msg {{ $isMe ? 'is-me' : 'is-other' }}">
-          <div class="msg__bubble">
-            <p class="msg__name">{{ $isMe ? 'あなた' : ($partner->name ?? 'ユーザー名') }}</p>
+          <div class="msg {{ $isMe ? 'is-me' : 'is-other' }}">
+      {{--上段 アバターと名前--}}
+            <div class="msg__content">
+              <div class="msg__head">
+                <img class="msg__avatar"
+                    src="{{ $m->sender && $m->sender->profile_img
+                            ? asset($m->sender->profile_img)
+                            : asset('img/default.png') }}"
+                    alt="avatar">
+                <p class="msg__name">
+                  @if($isMe)
+                  あなた
+                  @elseif($m->sender)
+                  {{ $m->sender->name }}
+                  @else
+                  ユーザー名
+                  @endif
+                </p>
 
-            @if($m->body)
-              <p class="msg__text">{{ $m->body }}</p>
-            @endif
+              </div>
 
-            @if($m->image_path)
-              <img class="msg__img" src="{{ asset('storage/' . $m->image_path) }}" alt="image">
-            @endif
+              <div class="msg__bubble">
+                @if($m->body)
+                  <p class="msg__text">{{ $m->body }}</p>
+                @endif
 
-            <div class="msg__meta">
-              <span class="msg__time">{{ $m->created_at ? $m->created_at->format('H:i') : '' }}</span>
+                @if($m->image_path)
+                  <img class="msg__img" src="{{ asset($m->image_path) }}" alt="image">
+                @endif
+                  <div class="msg__meta">
+                    <span class="msg__time">{{ $m->created_at ? $m->created_at->format('H:i') : '' }}</span>
+                    @if($isMe)
+                      <button type="button" class="msg__action" onclick="toggleEdit({{ $m->id }})">編集</button>
+                    <form id="edit-form-{{ $m->id }}" method="POST" action="{{ route('transactions.messages.update', ['message' => $m->id]) }}" style="display:none; margin-top:6px;">
+                      @csrf
+                      @method('PATCH')
+                      <input type="text" name="body" value="{{ $m->body }}" class="msg__editInput">
+                      <button type="submit" class="msg__action">保存</button>
+                    </form>
 
-              {{-- 編集/削除（自分の投稿のみ） --}}
-              @if($isMe)
-                <button type="button" class="msg__action" onclick="toggleEdit({{ $m->id }})">
-                  編集
-                </button>
-
-                <form id="edit-form-{{ $m->id }}"
-                      method="POST"
-                      action="{{ route('transactions.messages.update', ['message' => $m->id]) }}"
-                      style="display:none; margin-top:6px;">
-                  @csrf
-                  @method('PATCH')
-
-                  <input type="text"
-                        name="body"
-                        value="{{ $m->body }}"
-                        class="msg__editInput">
-
-                  <button type="submit" class="msg__action">保存</button>
-                </form>
-              @endif
-              @if($isMe)
-                <form method="POST"
-                      action="{{ route('transactions.messages.destroy', ['message' => $m->id]) }}"
-                      style="display:inline;">
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit"
-                          class="msg__action"
-                          onclick="return confirm('削除しますか？')">
-                    削除
-                  </button>
-                </form>
-              @endif
-
+                    <form method="POST" action="{{ route('transactions.messages.destroy', ['message' => $m->id]) }}" style="display:inline;">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="msg__action" onclick="return confirm('削除しますか？')">削除</button>
+                    </form>
+                    @endif
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div class="msg__avatar"></div>
-        </div>
-      @empty
-        <p class="chat-messages__empty">メッセージはまだありません</p>
-      @endforelse
-    </div>
-
-
-      {{-- エラー（FN008） --}}
-      @if($errors->any())
-        <div class="chat-input__errors">
-          @foreach($errors->all() as $error)
-            <p class="chat-input__error">{{ $error }}</p>
-          @endforeach
-        </div>
-      @endif
+          @empty
+          <p class="chat-messages__empty">メッセージはまだありません</p>
+        @endforelse
+      </div>
 
 
     @if(session('success'))
@@ -155,6 +140,7 @@
       @endif
 
       <input class="chat-input__text"
+            id="chat-body"
             type="text"
             name="body"
             placeholder="取引メッセージを記入してください"
@@ -162,11 +148,11 @@
 
       <label class="chat-input__fileBtn">
         画像を追加
-        <input type="file" name="image" accept=".png,.jpeg,.jpg" hidden>
+        <input type="file" name="image" accept="image/*"  hidden>
       </label>
 
       <button class="chat-input__send" type="submit" aria-label="送信">
-        ▶
+        <img src="{{ asset('img/arrow.jpg') }}" alt="送信">
       </button>
     </form>
 
@@ -213,31 +199,53 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
 
-      /*モーダル開閉*/
+    //チャット欄のメッセージ保持
+    const key = 'chat_body_draft_transaction_{{ $transaction->id }}';
+    const input = document.getElementById('chat-body');
+    if(!input) return;
+
+    if(!input.value) {
+      const saved = localStorage.getItem(key);
+      if(saved) input.value = saved;
+    }
+
+    input.addEventListener('input', function() {
+      localStorage.setItem(key, input.value);
+    });
+
+    //送信後に削除
+    const form = input.closest('form');
+    if(form) {
+      form.addEventListener('submit', function () {
+        localStorage.removeItem(key);
+      });
+    }
+
+    //モーダル開閉
     const modal = document.getElementById('complete-modal');
     if (!modal) return;
 
     const close = () => modal.setAttribute('aria-hidden', 'true');
     const open  = () => modal.setAttribute('aria-hidden', 'false');
 
-    // ① 購入者ボタンで開く（購入者だけボタンが存在）
+    //購入者ボタンで開く（購入者だけボタンが存在）
     const openBtn = document.getElementById('open-complete-modal');
     if (openBtn) {
       openBtn.addEventListener('click', open);
     }
 
-    // ② 背景クリックで閉じる（どちらの立場でも有効）
+    //背景クリックで閉じる（どちらの立場でも有効）
     const backdrop = modal.querySelector('.modal__backdrop');
     if (backdrop) {
       backdrop.addEventListener('click', close);
     }
 
-    // ③ 出品者：条件を満たしたら自動で開く（openBtn不要）
+    //出品者：条件を満たしたら自動で開く（openBtn不要）
     const auto = document.getElementById('auto-open-seller-rating');
     if (auto && auto.value === '1') {
       open();
     }
-    /*メッセージ編集切り替え*/
+    //メッセージ編集切り替え
     window.toggleEdit = function(id){
       const f = document.getElementById('edit-form-' + id);
       if (!f) return;

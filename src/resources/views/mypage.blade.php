@@ -10,7 +10,7 @@
     <div class="profile-img__info">
       @if (!empty($user->profile_img))
         <label for="profile_img">
-        <img id="preview" src="{{ asset('storage/' . $user->profile_img) }}" alt="プロフィール画像">
+        <img id="preview" src="{{ asset( $user->profile_img) }}" alt="プロフィール画像">
         </label>
       @else
         <label for="profile_img">
@@ -38,16 +38,20 @@
     <div class="mypage__tabs">
       <a class="{{ $page === 'sell' ? 'active' : '' }}" href="/mypage?page=sell">出品した商品</a>
       <a class="{{ $page === 'buy' ? 'active' : '' }}" href="/mypage?page=buy">購入した商品</a>
-      <a class="{{ $page === 'transaction' ? 'active' : '' }}" href="/mypage?page=transaction">取引中の商品</a>
-
+      <div class="transaction-tab">
+        <a class="{{ $page === 'transaction' ? 'active' : '' }}" href="/mypage?page=transaction">取引中の商品</a>
+        @if($totalUnread > 0)
+          <span class="count-badge count-badge--inline">{{ $totalUnread ?? 0 }}</span>
+        @endif
+      </div>
     </div>
 
     <div class="mypage__items">
       @if ($page === 'sell')
         @forelse ($sellingItems as $item)
-          <div class="item-card">
-            <a href="/item/{{ $item->id }}" class="item-card">
-            <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
+          <div class="item-thumb">
+            <a href="/item/{{ $item->id }}" class="item-thumb">
+            <img src="{{ asset($item->item_img) }}" alt="{{ $item->item_name }}">
             <p> {{ $item->item_name }}</p>
             </a>
           </div>
@@ -57,9 +61,9 @@
 
       @elseif($page === 'buy')
         @forelse($purchasedItems as $item)
-          <div class="item-card">
-            <a href="/item/{{ $item->id }}" class="item-card">
-            <img src="{{ asset('storage/' .$item->item_img) }}" alt="{{ $item->item_name }}">
+          <div class="item-thumb">
+            <a href="/item/{{ $item->id }}" class="item-thumb">
+            <img src="{{ asset($item->item_img) }}" alt="{{ $item->item_name }}">
             <p>{{ $item->item_name }}</p>
             </a>
           </div>
@@ -68,20 +72,23 @@
           @endforelse
 
         @elseif($page === 'transaction')
-          @forelse($transactions as $transaction)
-            <div class="item-card">
-              @if(($transaction->unread_count ?? 0) > 0)
-                <span class="badge">{{ $transaction->unread_count }}</span>
-              @endif
-              <a href="{{ route('transactions.show', ['transaction' => $transaction->id]) }}" class="item-card">
-              <img src="{{ asset('storage/' . $transaction->purchase->item->item_img) }}" alt="{{ $transaction->purchase->item->item_name }}">
-              <p>{{ $transaction->purchase->item->item_name }}</p>
-              </a>
-            </div>
+          @forelse($transactions as $t)
+            <a href="{{ route('transactions.show', ['transaction' => $t->id]) }}" class="item-card">
+              <div class="item-thumb">
+                <img src="{{ asset( $t->purchase->item->item_img) }}"
+                    alt="{{ $t->purchase->item->item_name }}">
+                @if($t->unread_count > 0)
+                  <span class="count-badge count-badge--corner">
+                    {{ $t->unread_count ?? 0 }}
+                  </span>
+                @endif
+              </div>
+              <p class="item-name">{{ $t->purchase->item->item_name }}</p>
+            </a>
           @empty
             <p class="empty-message">取引中の商品はありません。</p>
-        @endforelse
-      @endif
+          @endforelse
+        @endif
     </div>
   </div>
 </div>
